@@ -18,6 +18,7 @@ const WorkInProgressPage: React.FC = () => {
           className="back-link__arrow"
           src="/flecha.svg"
           alt=""
+          aria-hidden="true"
           height={40}
           width={40}
         />

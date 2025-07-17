@@ -1,6 +1,6 @@
 import Layout from "../Layout/Layout";
 
-const App: React.FC = () => {
+const App = () => {
   return <Layout />;
 };
 

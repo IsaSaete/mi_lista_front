@@ -1,14 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles/styles.css";
-import App from "./UI/components/App/App";
-import "@fontsource-variable/quicksand/index.css";
 import { BrowserRouter } from "react-router";
+import AppRouter from "./router/AppRouter";
+import "@fontsource-variable/quicksand/index.css";
+import "./styles/styles.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <AppRouter />
     </BrowserRouter>
   </StrictMode>,
 );

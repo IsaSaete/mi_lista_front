@@ -2,14 +2,27 @@
 ::after,
 ::before {
   box-sizing: border-box;
+  --main-color: #fff2e0;
+  --secondary-color: #ff9686;
+  --card-color: #b2ccb6;
 }
 
 body {
+  background-color: var(--main-color);
+  color: #090909;
   margin: 0;
+  font-family: "Quicksand Variable", sans-serif;
 }
 
 .main-container {
   max-width: 500px;
   margin: 0 auto;
-  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
 }

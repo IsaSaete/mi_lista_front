@@ -5,7 +5,6 @@ const Navigation: React.FC = () => {
   return (
     <nav className="navigation">
       <NavLink to="/menu-semanal" className="navigation__link">
-        Menú semanal
         <img
           src="/menu.svg"
           alt=""
@@ -14,9 +13,9 @@ const Navigation: React.FC = () => {
           width={40}
           height={40}
         />
+        Menú semanal
       </NavLink>
       <NavLink to="/lista-compra" className="navigation__link">
-        Lista de la compra
         <img
           src="/carrito.svg"
           alt=""
@@ -25,9 +24,9 @@ const Navigation: React.FC = () => {
           width={40}
           height={40}
         />
+        Mi cesta
       </NavLink>
       <NavLink to="/recetas" className="navigation__link">
-        Recetas
         <img
           src="/recetario.svg"
           alt=""
@@ -36,6 +35,7 @@ const Navigation: React.FC = () => {
           width={40}
           height={40}
         />
+        Recetas
       </NavLink>
     </nav>
   );

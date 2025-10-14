@@ -6,16 +6,15 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   test: {
-    root: "src",
     globals: true,
-    reporters: [`verbose`],
+    reporters: ["verbose"],
     environment: "jsdom",
-    setupFiles: ["./setupTests.ts"],
+    setupFiles: ["src/setupTests.ts"],
     coverage: {
       reportsDirectory: "../coverage",
       exclude: ["main.tsx", "vite-env.d.ts", "**/types.ts"],
       provider: "v8",
-      reporter: ["text", "json", "html"],
+      reporter: ["text", "html", "clover", "json", "lcov"],
       include: ["**/*.ts", "**/*.tsx"],
     },
   },

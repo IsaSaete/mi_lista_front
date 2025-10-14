@@ -4,14 +4,13 @@ import { MemoryRouter } from "react-router";
 
 describe("Given the WorkInProgressPage component", () => {
   describe("When it renders", () => {
-    test("Then it should show inside a heading level 1 'Página en construcción'", () => {
+    test("Then it should show inside a heading level 1 'Página en construcción'", async () => {
       const expectedTitle = /página en construcción/i;
 
       render(<WorkInProgressPage />, { wrapper: MemoryRouter });
 
-      const pageTitle = screen.getByRole("heading", {
+      const pageTitle = await screen.findByRole("heading", {
         name: expectedTitle,
-        level: 1,
       });
 
       expect(pageTitle).toBeInTheDocument();

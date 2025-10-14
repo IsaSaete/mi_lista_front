@@ -18,7 +18,7 @@ const DaySelector: React.FC = () => {
           key={day}
           onClick={() => handleClick(day)}
           className={`
-            w-10 h-10  rounded-full font-semibold transition-all border
+            w-10 h-10 rounded-full font-semibold transition-all border
             ${
               selectedDay === day
                 ? "bg-primary text-foreground scale-110 font-extrabold"

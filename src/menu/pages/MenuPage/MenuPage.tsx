@@ -5,7 +5,7 @@ const MenuPage: React.FC = () => {
   return (
     <>
       <PageTitle title="Menú semanal" />
-      <DaySelector />;
+      <DaySelector />
     </>
   );
 };

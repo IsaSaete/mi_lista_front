@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Navigation: React.FC = () => {
   return (
-    <nav className="h-screen p-5 flex flex-col items-center justify-center gap-4">
+    <nav className="flex flex-col items-center justify-center gap-4 w-full h-full">
       <NavLink
         to="/menu-semanal"
         className="max-w-[320px] w-full bg-[var(--card-color)] p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 

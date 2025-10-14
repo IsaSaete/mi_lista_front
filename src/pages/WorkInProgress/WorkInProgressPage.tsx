@@ -1,10 +1,11 @@
 import { Link } from "react-router";
 import "./WorkInProgressPage.css";
+import PageTitle from "@/menu/components/PageTitle/PageTitle";
 
 const WorkInProgressPage: React.FC = () => {
   return (
     <div className="main-content">
-      <h1 className="page-title">Página en construcción</h1>
+      <PageTitle title="Página en construcción" />
       <img
         className="work-image"
         src="/work-progress.svg"

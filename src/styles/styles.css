@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   /* Using exact hex colors from user */
   --main-color: #fff2e0;
@@ -93,10 +91,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
   body {
     @apply bg-background text-foreground font-sans;
   }

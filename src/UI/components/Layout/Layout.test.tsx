@@ -1,21 +1,18 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
-import AppRouter from "../../../router/AppRouter";
+import { MemoryRouter } from "react-router-dom";
+import Layout from "./Layout";
 
 describe("Given the Layout component", () => {
   describe("When it renders", () => {
-    test("Then it should show a 'MENÚ SEMANAL' link", () => {
-      const expectedLink = /menú semanal/i;
-
+    test("Then it shouldshow a header with a link to the home page", () => {
       render(
         <MemoryRouter initialEntries={["/"]}>
-          <AppRouter />
+          <Layout />
         </MemoryRouter>,
       );
 
-      const menuLink = screen.getByRole("link", { name: expectedLink });
-
-      expect(menuLink).toBeInTheDocument();
+      const homeLink = screen.getByRole("link", { name: /página principal/i });
+      expect(homeLink).toBeInTheDocument();
     });
   });
 });

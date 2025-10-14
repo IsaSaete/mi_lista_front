@@ -12,13 +12,13 @@ const DaySelector: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center gap-3 flex-wrap w-full min-w-[300px] max-w-full px-4">
+    <div className="flex justify-center gap-3 flex-wrap w-full min-w-[300px] max-w-full pb-5">
       {days.map((day) => (
         <button
           key={day}
           onClick={() => handleClick(day)}
           className={`
-            w-10 h-10 rounded-full font-semibold transition-all border
+            w-9 h-9 rounded-full font-semibold transition-all border
             ${
               selectedDay === day
                 ? "bg-primary text-foreground scale-110 font-extrabold"

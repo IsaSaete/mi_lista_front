@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import Navigation from "./Navigation";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 
 describe("Given the Navigation component", () => {
   describe("When it renders", () => {

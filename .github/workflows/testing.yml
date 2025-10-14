@@ -11,8 +11,11 @@ jobs:
       - name: ⬇ Git checkout
         uses: actions/checkout@v4
 
-      - name: 💾 Install modules
-        run: npm ci
+      - name: 💾 Install dependencies (retry up to 3 times)
+        run: |
+          for i in 1 2 3; do
+            npm ci && break || sleep 10
+          done
 
       - name: 🧪 Testing
         run: npm test

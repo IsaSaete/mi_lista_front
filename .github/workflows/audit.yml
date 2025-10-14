@@ -4,8 +4,8 @@ on: push
 
 jobs:
   audit:
+    name: 🧹 Code audit
     runs-on: ubuntu-latest
-    name: Code audit
 
     steps:
       - name: ⬇ Git checkout
@@ -22,8 +22,11 @@ jobs:
         with:
           must_deny: "node_modules"
 
-      - name: 💾 Install modules
-        run: npm ci
+      - name: 💾 Install dependencies (retry up to 3 times)
+        run: |
+          for i in 1 2 3; do
+            npm ci && break || sleep 10
+          done
 
       - name: 🔍 ESLint validation
         run: npx eslint src --max-warnings 0

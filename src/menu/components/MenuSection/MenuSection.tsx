@@ -2,9 +2,13 @@ import type { MenuType } from "@/menu/types";
 
 interface MenuSectionProps {
   titleMenu: MenuType;
+  recipe: string;
 }
 
-const MenuSection: React.FC<MenuSectionProps> = ({ titleMenu: menuType }) => {
+const MenuSection: React.FC<MenuSectionProps> = ({
+  titleMenu: menuType,
+  recipe = "",
+}) => {
   return (
     <>
       <div className="bg-sage rounded-2xl p-6 space-y-4 mb-5">
@@ -12,11 +16,14 @@ const MenuSection: React.FC<MenuSectionProps> = ({ titleMenu: menuType }) => {
           {menuType}
         </h2>
         <div className="min-h-[80px] flex justify-center text-center">
-          <p className="text-muted-foreground italic">Sin receta asignada</p>
+          <p className="text-muted-foreground italic">
+            {" "}
+            {recipe ? recipe : "Sin receta asignada"}
+          </p>
         </div>
         <div className="flex w-full justify-between">
           <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors">
-            Editar
+            {recipe ? "Editar" : "Añadir"}
           </button>
           <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors">
             Ingredientes

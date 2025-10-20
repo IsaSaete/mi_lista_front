@@ -7,8 +7,8 @@ const MenuPage: React.FC = () => {
     <>
       <PageTitle title="Menú semanal" />
       <DaySelector />
-      <MenuSection titleMenu="comida" />
-      <MenuSection titleMenu="cena" />
+      <MenuSection titleMenu="comida" recipe="" />
+      <MenuSection titleMenu="cena" recipe="" />
     </>
   );
 };

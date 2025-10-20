@@ -1,10 +1,24 @@
 import PageTitle from "@/menu/components/PageTitle/PageTitle";
-import IngredientForm from "@/menu/shoppingList/components/IngredientForm/IngredientForm";
 import ShoppingList from "@/menu/shoppingList/components/ShoppingList/ShoppingList";
 import type { Ingredient } from "@/menu/types";
 
+import { useEffect, useState } from "react";
+import ShoppingListClient from "../../client/ShoppingListClient";
+import IngredientForm from "../../components/IngredientForm/IngredientForm";
+
+const shoppingListClient = new ShoppingListClient();
+
 const ShoppingListPage = () => {
-  const ingredients: Ingredient[] = [];
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+
+  useEffect(() => {
+    const fetchIngredients = async () => {
+      const data = await shoppingListClient.getShoppingList();
+      setIngredients(data);
+    };
+
+    fetchIngredients();
+  }, []);
 
   return (
     <>

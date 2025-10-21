@@ -1,4 +1,4 @@
-import type { IngredientDto } from "./shoppingList/dto/type";
+import type { IngredientDto } from "./shoppingList/dto/types";
 
 export type MenuType = "comida" | "cena";
 

@@ -11,7 +11,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["src/setupTests.ts"],
     coverage: {
-      reportsDirectory: "../coverage",
+      reportsDirectory: "./coverage",
       exclude: [
         "src/main.tsx",
         "src/vite-env.d.ts",

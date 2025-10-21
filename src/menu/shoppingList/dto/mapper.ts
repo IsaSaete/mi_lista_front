@@ -1,5 +1,5 @@
 import type { Ingredient } from "@/menu/types";
-import type { IngredientDto } from "./type";
+import type { IngredientDto } from "./types";
 
 export const mapIngredientDtoToIngredient = ({
   _id,

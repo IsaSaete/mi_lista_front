@@ -13,10 +13,12 @@ class ShoppingListClient implements ShoppingListClientStructure {
       throw new Error("Error fetching shopping list");
     }
 
-    const shoppingListData = (await response.json()) as ShoppingListDto;
+    const shoppingListData = (await response.json()) as {
+      shoppingList: ShoppingListDto;
+    };
 
     const ingredients = mapIngredientsDtotoIngredients(
-      shoppingListData.ingredients,
+      shoppingListData.shoppingList.ingredients,
     );
 
     return ingredients;

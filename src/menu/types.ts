@@ -1,5 +1,3 @@
-import type { IngredientDto } from "./shoppingList/dto/types";
-
 export type MenuType = "comida" | "cena";
 
 export interface Ingredient {
@@ -11,6 +9,7 @@ export interface Ingredient {
 }
 
 export interface ShoppingList {
-  _id: string;
-  ingredients: IngredientDto[];
+  id: string;
+  ingredients: Ingredient[];
+  updatedAt: Date;
 }

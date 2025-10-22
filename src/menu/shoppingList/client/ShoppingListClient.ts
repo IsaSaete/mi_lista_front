@@ -1,6 +1,7 @@
-import type { Ingredient, ShoppingList } from "@/menu/types";
+import type { Ingredient } from "@/menu/types";
 import type { ShoppingListClientStructure } from "./types";
 import { mapIngredientsDtotoIngredients } from "../dto/mapper";
+import type { ShoppingListDto } from "../dto/types";
 
 class ShoppingListClient implements ShoppingListClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
@@ -12,12 +13,10 @@ class ShoppingListClient implements ShoppingListClientStructure {
       throw new Error("Error fetching shopping list");
     }
 
-    const shoppingListData = (await response.json()) as {
-      shoppingList: ShoppingList;
-    };
+    const shoppingListData = (await response.json()) as ShoppingListDto;
 
     const ingredients = mapIngredientsDtotoIngredients(
-      shoppingListData.shoppingList.ingredients,
+      shoppingListData.ingredients,
     );
 
     return ingredients;

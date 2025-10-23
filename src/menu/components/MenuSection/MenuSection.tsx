@@ -11,7 +11,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({
 }) => {
   return (
     <>
-      <div className="bg-sage rounded-2xl p-6 space-y-4 mb-5">
+      <div className="bg-secondary rounded-2xl p-6 space-y-4 mb-5">
         <h2 className="text-3xl uppercase font-bold underline text-center pb-2 m-0">
           {menuType}
         </h2>
@@ -22,10 +22,10 @@ const MenuSection: React.FC<MenuSectionProps> = ({
           </p>
         </div>
         <div className="flex w-full justify-between">
-          <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors">
+          <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors focus:outline-none focus:ring-3 focus:ring-secondary-hover">
             {recipe ? "Editar" : "Añadir"}
           </button>
-          <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors">
+          <button className="bg-primary hover:bg-background text-foreground font-semibold px-6 py-2 rounded-lg transition-colors focus:outline-none focus:ring-3 focus:ring-secondary-hover">
             Ingredientes
           </button>
         </div>

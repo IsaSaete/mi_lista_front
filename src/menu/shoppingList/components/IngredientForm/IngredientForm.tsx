@@ -39,12 +39,12 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
           value={ingredientName}
           onChange={handleChange}
           placeholder="Necesito..."
-          className="flex-1 px-4 py-3 rounded-full bg-white text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-3 focus:ring-[var(--button-color)] "
+          className="flex-1 px-4 py-3 rounded-full bg-background text-foreground placeholder:text-foreground/50 focus:outline-none focus:ring-3 focus:ring-secondary-hover "
         />
 
         <button
           type="submit"
-          className="w-12 h-12 rounded-full bg-[var(--button-color)] hover:bg-[var(--card-color)] hover:text-gray-950 flex items-center justify-center text-white font-bold text-3xl transition-colors"
+          className="w-12 h-12 rounded-full bg-secondary-hover hover:bg-secondary hover:text-gray-950 flex items-center justify-center text-white font-bold text-3xl transition-colors focus:outline-none focus:ring-3 focus:ring-background"
           aria-label="Añadir ingrediente"
         >
           +

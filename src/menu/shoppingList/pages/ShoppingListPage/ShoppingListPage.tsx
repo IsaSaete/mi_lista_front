@@ -1,29 +1,35 @@
 import PageTitle from "@/menu/components/PageTitle/PageTitle";
 import ShoppingList from "@/menu/shoppingList/components/ShoppingList/ShoppingList";
-import type { Ingredient } from "@/menu/types";
-
-import { useEffect, useState } from "react";
-import ShoppingListClient from "../../client/ShoppingListClient";
 import IngredientForm from "../../components/IngredientForm/IngredientForm";
-
-const shoppingListClient = new ShoppingListClient();
+import { useEffect } from "react";
+import useShoppingList from "../../hooks/useShoppingList";
+import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/components/ui/button";
 
 const ShoppingListPage = () => {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+  const { ingredients, loadIngredients, isLoading } = useShoppingList();
 
   useEffect(() => {
-    const fetchIngredients = async () => {
-      const data = await shoppingListClient.getShoppingList();
-      setIngredients(data);
-    };
-
-    fetchIngredients();
-  }, []);
+    loadIngredients();
+  }, [loadIngredients]);
 
   return (
     <>
       <PageTitle title="lista de la compra" />
-      <ShoppingList ingredients={ingredients} />
+      {isLoading ? (
+        <div className="flex justify-center items-center p-5 w-fit mx-auto">
+          <Button
+            className="bg-secondary disabled:opacity-70 text-foreground flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-lg sm:text-2xl h-auto px-4 sm:px-6 py-2 sm:py-3 text-center"
+            disabled
+            size="lg"
+          >
+            <Spinner className="size-10 sm:size-12 animate-spin text-inherit" />
+            Cargando ingredientes
+          </Button>
+        </div>
+      ) : (
+        <ShoppingList ingredients={ingredients} />
+      )}
       <IngredientForm addIngredient={() => {}} />
     </>
   );

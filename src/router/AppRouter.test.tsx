@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import AppRouter from "./AppRouter";
+import { Provider } from "react-redux";
+import store from "@/store/store";
 
 describe("Given the AppRouter component", () => {
   describe("when it renders in path /recets that it doesn't exists", () => {
@@ -26,9 +28,11 @@ describe("Given the AppRouter component", () => {
       const expectedTitlePage = /lista de la compra/i;
 
       render(
-        <MemoryRouter initialEntries={["/lista-compra"]}>
-          <AppRouter />
-        </MemoryRouter>,
+        <Provider store={store}>
+          <MemoryRouter initialEntries={["/lista-compra"]}>
+            <AppRouter />
+          </MemoryRouter>
+        </Provider>,
       );
 
       const titlePage = await screen.findByRole("heading", {

@@ -24,7 +24,9 @@ const shoppingListSlice = createSlice({
   },
 });
 
-export const { loadIngredients, startLoadingIngredients } =
-  shoppingListSlice.actions;
+export const {
+  loadIngredients: loadIngredientsCreator,
+  startLoadingIngredients: startLoadingIngredientsCreator,
+} = shoppingListSlice.actions;
 
 export const shoppingListReduder = shoppingListSlice.reducer;

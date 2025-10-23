@@ -5,7 +5,7 @@ export interface Ingredient {
   name: string;
   category: string;
   purchasedAt: boolean;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface ShoppingList {

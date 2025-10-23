@@ -18,11 +18,11 @@ const DaySelector: React.FC = () => {
           key={day}
           onClick={() => handleClick(day)}
           className={`
-            w-9 h-9 rounded-full font-semibold transition-all border
+            w-9 h-9 rounded-full font-semibold transition-all border focus:outline-none focus:ring-3 focus:ring-secondary-hover
             ${
               selectedDay === day
                 ? "bg-primary text-foreground scale-110 font-extrabold"
-                : "bg-[var(--card-color)] border-transparent text-foreground hover:bg-muted hover:border-black"
+                : "bg-secondary border-transparent text-foreground hover:bg-background hover:border-foreground"
             }
           `}
           aria-label={`Seleccionar ${day}`}

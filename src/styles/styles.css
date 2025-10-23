@@ -1,94 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  /* Using exact hex colors from user */
-  --main-color: #fff2e0;
-  --secondary-color: #ff9686;
-  --card-color: #b2ccb6;
-  --button-color: #217267;
-
-  --background: #fff2e0; /* Beige */
-  --foreground: #1a1a1a; /* Dark text */
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #ff9686; /* Coral */
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: #ff9686; /* Coral accent */
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #ff9686;
-  --radius: 0.5rem;
-
-  /* Custom sage green color */
-  --sage: #b2ccb6; /* Sage green */
-  --sage-dark: #9ab89e;
-  --primary-hover: #ff8270; /* Darker coral for hover */
+  --background: #fff2e0;
+  --foreground: #090909;
+  --primary-color: #ff9686;
+  --primary-hover: #ff8270;
+  --secondary-color: #b2ccb6;
+  --secondary-hover: #1a5e55;
 }
 
 .dark {
   --background: #1a1a1a;
   --foreground: #fafafa;
-  --card: #1a1a1a;
-  --card-foreground: #fafafa;
-  --popover: #1a1a1a;
-  --popover-foreground: #fafafa;
-  --primary: #fafafa;
-  --primary-foreground: #1a1a1a;
-  --secondary: #262626;
-  --secondary-foreground: #fafafa;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --accent: #262626;
-  --accent-foreground: #fafafa;
-  --destructive: #7f1d1d;
-  --destructive-foreground: #fafafa;
-  --border: #262626;
-  --input: #262626;
-  --ring: #525252;
+  --primary-color: #2d2d2d;
+  --secondary-color: #3e8f82;
+  --secondary-hover: #2d7a6f;
 }
 
 @theme inline {
-  /* Using Quicksand font */
   --font-sans: "Quicksand Variable", "Quicksand", sans-serif;
   --font-mono: ui-monospace, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-
-  /* Custom app colors mapped to Tailwind */
-  --color-sage: var(--sage);
-  --color-sage-dark: var(--sage-dark);
+  --color-primary: var(--primary-color);
   --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary-color);
+  --color-secondary-hover: var(--secondary-hover);
 }
 
 @layer base {

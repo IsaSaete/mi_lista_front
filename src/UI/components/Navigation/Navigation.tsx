@@ -6,9 +6,9 @@ const Navigation: React.FC = () => {
     <nav className="flex flex-col items-center justify-center gap-4 w-full h-full">
       <NavLink
         to="/menu-semanal"
-        className="max-w-[320px] w-full bg-[var(--card-color)] p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
+        className="max-w-[320px] w-full bg-secondary p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
           flex items-center justify-between gap-5 text-left transition-transform duration-300 ease-in-out 
-          shadow-md hover:bg-[var(--secondary-color)] hover:scale-105"
+          shadow-md hover:bg-primary-hover  hover:scale-105 focus:outline-none focus:ring-3 focus:ring-secondary-hover"
       >
         <span className="text-2xl font-semibold text-foreground">
           MENÚ SEMANAL
@@ -17,9 +17,9 @@ const Navigation: React.FC = () => {
       </NavLink>
       <NavLink
         to="/lista-compra"
-        className="max-w-[320px] w-full bg-[var(--card-color)] p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
+        className="max-w-[320px] w-full bg-secondary p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
           flex items-center justify-between gap-5 text-left transition-transform duration-300 ease-in-out 
-          shadow-md hover:bg-[var(--secondary-color)] hover:scale-105"
+          shadow-md hover:bg-primary-hover  hover:scale-105 focus:outline-none focus:ring-3 focus:ring-secondary-hover"
       >
         <span className="text-2xl font-semibold text-foreground">MI CESTA</span>
         <img
@@ -32,9 +32,9 @@ const Navigation: React.FC = () => {
       </NavLink>
       <NavLink
         to="/recetas"
-        className="max-w-[320px] w-full bg-[var(--card-color)] p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
+        className="max-w-[320px] w-full bg-secondary  p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
           flex items-center justify-between gap-5 text-left transition-transform duration-300 ease-in-out 
-          shadow-md hover:bg-[var(--secondary-color)] hover:scale-105"
+          shadow-md hover:bg-primary-hover hover:scale-105 focus:outline-none focus:ring-3 focus:ring-secondary-hover"
       >
         <span className="text-2xl font-semibold text-foreground">RECETAS</span>
         <img

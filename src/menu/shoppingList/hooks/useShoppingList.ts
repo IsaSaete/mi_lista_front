@@ -30,16 +30,12 @@ const useShoppingList = () => {
 
   const addIngredient = useCallback(
     async (ingredientName: IngredientSendFormData): Promise<void> => {
-      const timeout = setTimeout(() => startLoadingIngredientsCreator(), 200);
-
       try {
         const addIngredient =
           await shoppingListClient.addIngredient(ingredientName);
         dispatch(addIngredientCreator(addIngredient));
       } catch {
         throw Error;
-      } finally {
-        clearTimeout(timeout);
       }
     },
 

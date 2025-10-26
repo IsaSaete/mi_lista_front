@@ -1,7 +1,8 @@
+import type { IngredientSendFormData } from "@/menu/types";
 import React, { useState } from "react";
 
 interface IngredientFormProps {
-  addIngredient: (name: string) => void;
+  addIngredient: (nameIngredient: IngredientSendFormData) => void;
 }
 
 const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
@@ -14,8 +15,9 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
 
     const formattedName =
       ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1);
+    const ingredientData: IngredientSendFormData = { name: formattedName };
 
-    addIngredient(formattedName);
+    addIngredient(ingredientData);
 
     setIngredientName("");
   };

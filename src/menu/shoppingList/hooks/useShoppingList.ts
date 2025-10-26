@@ -3,9 +3,11 @@ import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import ShoppingListClient from "../client/ShoppingListClient";
 import {
+  addIngredientCreator,
   loadIngredientsCreator,
   startLoadingIngredientsCreator,
 } from "../slice/shoppingListSlice";
+import type { IngredientSendFormData } from "@/menu/types";
 
 const useShoppingList = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,25 @@ const useShoppingList = () => {
     }
   }, [shoppingListClient, dispatch]);
 
-  return { loadIngredients, ingredients, isLoading };
+  const addIngredient = useCallback(
+    async (ingredientName: IngredientSendFormData): Promise<void> => {
+      const timeout = setTimeout(() => startLoadingIngredientsCreator(), 200);
+
+      try {
+        const addIngredient =
+          await shoppingListClient.addIngredient(ingredientName);
+        dispatch(addIngredientCreator(addIngredient));
+      } catch {
+        throw Error;
+      } finally {
+        clearTimeout(timeout);
+      }
+    },
+
+    [dispatch, shoppingListClient],
+  );
+
+  return { loadIngredients, ingredients, isLoading, addIngredient };
 };
 
 export default useShoppingList;

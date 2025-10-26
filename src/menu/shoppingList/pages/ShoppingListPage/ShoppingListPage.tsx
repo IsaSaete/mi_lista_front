@@ -7,7 +7,8 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 
 const ShoppingListPage = () => {
-  const { ingredients, loadIngredients, isLoading } = useShoppingList();
+  const { ingredients, loadIngredients, isLoading, addIngredient } =
+    useShoppingList();
 
   useEffect(() => {
     loadIngredients();
@@ -30,7 +31,7 @@ const ShoppingListPage = () => {
       ) : (
         <ShoppingList ingredients={ingredients} />
       )}
-      <IngredientForm addIngredient={() => {}} />
+      <IngredientForm addIngredient={addIngredient} />
     </>
   );
 };

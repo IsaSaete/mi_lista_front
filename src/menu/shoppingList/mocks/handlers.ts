@@ -1,5 +1,5 @@
 import { http, HttpResponse } from "msw";
-import { shoppingListResponseFixture } from "../dto/fixturesDto";
+import { albahacaDto, shoppingListResponseFixture } from "../dto/fixturesDto";
 import type { IngredientDto, ShoppingListResponseDto } from "../dto/types";
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -15,5 +15,11 @@ export const shoppingListHandlers = [
     return HttpResponse.json<ShoppingListResponseDto>(
       shoppingListResponseFixture,
     );
+  }),
+
+  http.post(`${apiUrl}/shopping-list`, () => {
+    return HttpResponse.json<{ ingredient: IngredientDto }>({
+      ingredient: albahacaDto,
+    });
   }),
 ];

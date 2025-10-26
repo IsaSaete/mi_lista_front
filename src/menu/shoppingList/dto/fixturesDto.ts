@@ -10,7 +10,7 @@ export const tomatoDto: IngredientDto = {
 
 export const aceiteDto: IngredientDto = {
   _id: "2",
-  name: "Aceite de oliva",
+  name: "Aceite de oliva virgen extra",
   category: "Aceite",
   createdAt: "2025-10-02T12:15:00Z",
   purchasedAt: false,

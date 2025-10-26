@@ -34,4 +34,4 @@ export const {
   addIngredient: addIngredientCreator,
 } = shoppingListSlice.actions;
 
-export const shoppingListReduder = shoppingListSlice.reducer;
+export const shoppingListReducer = shoppingListSlice.reducer;

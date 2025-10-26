@@ -1,8 +1,8 @@
-import { shoppingListReduder } from "@/menu/shoppingList/slice/shoppingListSlice";
+import { shoppingListReducer } from "@/menu/shoppingList/slice/shoppingListSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
 const store = configureStore({
-  reducer: { shoppinglist: shoppingListReduder },
+  reducer: { shoppingList: shoppingListReducer },
 });
 
 export default store;

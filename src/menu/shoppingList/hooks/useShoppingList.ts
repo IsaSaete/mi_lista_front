@@ -12,7 +12,7 @@ import type { IngredientSendFormData } from "@/menu/types";
 const useShoppingList = () => {
   const dispatch = useDispatch();
   const { ingredients, isLoading } = useAppSelector(
-    (state) => state.shoppinglist,
+    (state) => state.shoppingList,
   );
 
   const shoppingListClient = useMemo(() => new ShoppingListClient(), []);

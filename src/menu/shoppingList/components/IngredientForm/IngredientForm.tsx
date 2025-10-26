@@ -17,9 +17,9 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
       ingredientName.charAt(0).toUpperCase() + ingredientName.slice(1);
     const ingredientData: IngredientSendFormData = { name: formattedName };
 
-    addIngredient(ingredientData);
-
     setIngredientName("");
+
+    addIngredient(ingredientData);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

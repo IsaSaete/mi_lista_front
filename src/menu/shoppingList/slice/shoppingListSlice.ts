@@ -21,12 +21,17 @@ const shoppingListSlice = createSlice({
       state.ingredients = ingredients;
       state.isLoading = false;
     },
+    addIngredient: (state, action: PayloadAction<Ingredient>) => {
+      const newIngredient = action.payload;
+      state.ingredients.push(newIngredient);
+    },
   },
 });
 
 export const {
   loadIngredients: loadIngredientsCreator,
   startLoadingIngredients: startLoadingIngredientsCreator,
+  addIngredient: addIngredientCreator,
 } = shoppingListSlice.actions;
 
-export const shoppingListReduder = shoppingListSlice.reducer;
+export const shoppingListReducer = shoppingListSlice.reducer;

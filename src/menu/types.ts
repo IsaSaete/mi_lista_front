@@ -13,3 +13,8 @@ export interface ShoppingList {
   ingredients: Ingredient[];
   updatedAt: Date;
 }
+
+export type IngredientSendFormData = Omit<
+  Ingredient,
+  "id" | "category" | "purchasedAt" | "createdAt"
+>;

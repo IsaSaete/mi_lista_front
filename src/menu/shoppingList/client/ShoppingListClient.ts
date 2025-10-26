@@ -1,6 +1,12 @@
-import type { Ingredient } from "@/menu/types";
-import type { ShoppingListClientStructure } from "./types";
-import { mapIngredientsDtotoIngredients } from "../dto/mapper";
+import type { Ingredient, IngredientSendFormData } from "@/menu/types";
+import type {
+  ResponseIngredientDto,
+  ShoppingListClientStructure,
+} from "./types";
+import {
+  mapIngredientDtoToIngredient,
+  mapIngredientsDtotoIngredients,
+} from "../dto/mapper";
 import type { ShoppingListDto } from "../dto/types";
 
 class ShoppingListClient implements ShoppingListClientStructure {
@@ -22,6 +28,25 @@ class ShoppingListClient implements ShoppingListClientStructure {
     );
 
     return ingredients;
+  };
+
+  public addIngredient = async (
+    ingredientName: IngredientSendFormData,
+  ): Promise<Ingredient> => {
+    const response = await fetch(`${this.apiUrl}/shopping-list`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: ingredientName.name }),
+    });
+    if (!response.ok) {
+      throw new Error("Error adding new ingredient");
+    }
+
+    const { ingredient } = (await response.json()) as ResponseIngredientDto;
+
+    const newIgredient = mapIngredientDtoToIngredient(ingredient);
+
+    return newIgredient;
   };
 }
 

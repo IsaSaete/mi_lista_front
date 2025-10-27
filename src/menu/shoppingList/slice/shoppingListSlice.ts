@@ -4,16 +4,13 @@ import type { Ingredient } from "@/menu/types";
 
 const initialState: ShoppingListState = {
   ingredients: [],
-  isLoading: false,
+  isLoading: true,
 };
 
 const shoppingListSlice = createSlice({
   name: "shoppingList",
   initialState,
   reducers: {
-    startLoadingIngredients: (state) => {
-      state.isLoading = true;
-    },
     loadIngredients: (
       state,
       { payload: ingredients }: PayloadAction<Ingredient[]>,
@@ -30,7 +27,6 @@ const shoppingListSlice = createSlice({
 
 export const {
   loadIngredients: loadIngredientsCreator,
-  startLoadingIngredients: startLoadingIngredientsCreator,
   addIngredient: addIngredientCreator,
 } = shoppingListSlice.actions;
 

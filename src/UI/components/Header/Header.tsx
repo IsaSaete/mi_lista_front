@@ -6,7 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
-    <header className="fixed top-0 w-full max-w-[500px] mx-auto z-1 bg-primary px-4 py-4 uppercase h-16 flex items-center justify-center">
+    <header className="fixed top-0 w-full max-w-[500px] mx-auto z-1 bg-primary p-4 uppercase h-16 flex items-center justify-center">
       <Link
         to="/"
         aria-label="Página principal"

@@ -6,7 +6,7 @@ interface ShoppingListProps {
 
 const ShoppingList: React.FC<ShoppingListProps> = ({ ingredients }) => {
   return (
-    <section className="bg-secondary rounded-2xl p-6 mb-6 flex-1">
+    <section className="bg-secondary rounded-2xl p-6 flex-1">
       {ingredients.length === 0 ? (
         <p role="status" className="text-foreground/60 text-center">
           No hay ingredientes en la lista

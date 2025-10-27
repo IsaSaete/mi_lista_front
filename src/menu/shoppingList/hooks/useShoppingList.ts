@@ -5,7 +5,6 @@ import ShoppingListClient from "../client/ShoppingListClient";
 import {
   addIngredientCreator,
   loadIngredientsCreator,
-  startLoadingIngredientsCreator,
 } from "../slice/shoppingListSlice";
 import type { IngredientSendFormData } from "@/menu/types";
 
@@ -18,8 +17,6 @@ const useShoppingList = () => {
   const shoppingListClient = useMemo(() => new ShoppingListClient(), []);
 
   const loadIngredients = useCallback(async (): Promise<void> => {
-    dispatch(startLoadingIngredientsCreator());
-
     try {
       const ingredientsList = await shoppingListClient.getShoppingList();
       dispatch(loadIngredientsCreator(ingredientsList));
@@ -33,6 +30,7 @@ const useShoppingList = () => {
       try {
         const addIngredient =
           await shoppingListClient.addIngredient(ingredientName);
+
         dispatch(addIngredientCreator(addIngredient));
       } catch {
         throw Error;

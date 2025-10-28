@@ -1,7 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { server } from "@/setupTests";
 import ShoppingListClient from "../ShoppingListClient";
-import { aceite, tomato } from "@/mockData/ingredients";
+import { albahaca, tomato } from "@/mockData/ingredients";
 
 describe("Given the togglePurchasedStatus method of ShoppingListClient", () => {
   describe("When it's called with Tomato ingredient that isn`t purchased yet", () => {
@@ -24,7 +24,7 @@ describe("Given the togglePurchasedStatus method of ShoppingListClient", () => {
       const apiUrl = import.meta.env.VITE_API_URL;
 
       server.use(
-        http.patch(`${apiUrl}/shopping-list`, () => {
+        http.patch(`${apiUrl}/shopping-list/ingredients/${albahaca.id}`, () => {
           return new HttpResponse(null, { status: 500 });
         }),
       );
@@ -32,7 +32,7 @@ describe("Given the togglePurchasedStatus method of ShoppingListClient", () => {
       const shoppingListClient = new ShoppingListClient();
 
       const ingredientUpdate = shoppingListClient.togglePurchasedStatus(
-        aceite.id,
+        albahaca.id,
       );
 
       expect(ingredientUpdate).rejects.toThrow(expectedErrorMessage);

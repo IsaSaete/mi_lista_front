@@ -41,12 +41,35 @@ class ShoppingListClient implements ShoppingListClientStructure {
     if (!response.ok) {
       throw new Error("Error adding new ingredient");
     }
+    const { ingredient } = (await response.json()) as ResponseIngredientDto;
+
+    const newIngredient = mapIngredientDtoToIngredient(ingredient);
+
+    return newIngredient;
+  };
+
+  public togglePurchasedStatus = async (
+    ingredientId: string,
+  ): Promise<Ingredient> => {
+    const response = await fetch(
+      `${this.apiUrl}/shopping-list/ingredients/${ingredientId}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        "Failed to change the isPurchased property of ingredient",
+      );
+    }
 
     const { ingredient } = (await response.json()) as ResponseIngredientDto;
 
-    const newIgredient = mapIngredientDtoToIngredient(ingredient);
+    const updatedIngredient = mapIngredientDtoToIngredient(ingredient);
 
-    return newIgredient;
+    return updatedIngredient;
   };
 }
 

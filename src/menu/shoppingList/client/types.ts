@@ -6,6 +6,7 @@ export interface ShoppingListClientStructure {
   addIngredient: (
     ingredientName: IngredientSendFormData,
   ) => Promise<Ingredient>;
+  togglePurchasedStatus: (ingredientId: string) => Promise<Ingredient>;
 }
 
 export interface ResponseIngredientDto {

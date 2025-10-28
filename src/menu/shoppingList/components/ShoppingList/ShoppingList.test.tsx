@@ -1,8 +1,10 @@
 import { albahaca, tomato } from "@/mockData/ingredients";
 import { render, screen } from "@testing-library/react";
 import ShoppingList from "./ShoppingList";
+import { Provider } from "react-redux";
+import store from "@/store/store";
 
-describe("Given the ShoppingList componetn", () => {
+describe("Given the ShoppingList component", () => {
   describe("When it receives a 'Tomate, Albahaca fresca'", () => {
     test("Then it should show the names inside a heading", () => {
       const expectedTomatoName = tomato.name;
@@ -10,7 +12,11 @@ describe("Given the ShoppingList componetn", () => {
 
       const ingredientsData = [tomato, albahaca];
 
-      render(<ShoppingList ingredients={ingredientsData} />);
+      render(
+        <Provider store={store}>
+          <ShoppingList ingredients={ingredientsData} />
+        </Provider>,
+      );
 
       const tomatoName = screen.getByRole("heading", {
         name: expectedTomatoName,

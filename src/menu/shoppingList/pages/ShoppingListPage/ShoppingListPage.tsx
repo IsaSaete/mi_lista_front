@@ -13,14 +13,31 @@ const ShoppingListPage = () => {
     loadIngredients();
   }, [loadIngredients]);
 
+  const ingredientsNotPurchased = ingredients.filter(
+    (ingredient) => !ingredient.isPurchased,
+  );
+
+  const ingredientsPurchased = ingredients
+    .filter((ingredient) => ingredient.isPurchased)
+    .slice(-6)
+    .reverse();
+
   return (
     <>
       <PageTitle title="lista de la compra" />
       {isLoading ? (
         <Loader message="Cargando ingredientes" />
       ) : (
-        <ShoppingList ingredients={ingredients} />
+        <ShoppingList
+          ingredients={ingredientsNotPurchased}
+          variant="notPurchased"
+        />
       )}
+      <ShoppingList
+        ingredients={ingredientsPurchased}
+        variant="purchased"
+        title="Comprados recientemente:"
+      />
       <IngredientForm addIngredient={addIngredient} />
     </>
   );

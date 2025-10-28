@@ -4,7 +4,7 @@ export interface Ingredient {
   id: string;
   name: string;
   category: string;
-  purchasedAt: boolean;
+  isPurchased: boolean;
   createdAt: string;
 }
 
@@ -16,5 +16,5 @@ export interface ShoppingList {
 
 export type IngredientSendFormData = Omit<
   Ingredient,
-  "id" | "category" | "purchasedAt" | "createdAt"
+  "id" | "category" | "isPurchased" | "createdAt"
 >;

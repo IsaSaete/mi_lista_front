@@ -5,6 +5,7 @@ import ShoppingListClient from "../client/ShoppingListClient";
 import {
   addIngredientCreator,
   loadIngredientsCreator,
+  togglePurchasedStatusCreator,
 } from "../slice/shoppingListSlice";
 import type { IngredientSendFormData } from "@/menu/types";
 
@@ -40,7 +41,20 @@ const useShoppingList = () => {
     [dispatch, shoppingListClient],
   );
 
-  return { loadIngredients, ingredients, isLoading, addIngredient };
+  const togglePurchasedStatus = async (ingredientId: string): Promise<void> => {
+    const updatedIngredient =
+      await shoppingListClient.togglePurchasedStatus(ingredientId);
+
+    dispatch(togglePurchasedStatusCreator(updatedIngredient));
+  };
+
+  return {
+    loadIngredients,
+    ingredients,
+    isLoading,
+    addIngredient,
+    togglePurchasedStatus,
+  };
 };
 
 export default useShoppingList;

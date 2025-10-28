@@ -1,11 +1,11 @@
 import type { Ingredient } from "@/menu/types";
 
 export const tomato: Ingredient = {
-  id: "1",
+  id: "14fbf39d8c9d1e4dabc5f1e2",
   name: "Tomate",
   category: "Verdura",
   createdAt: "2025-10-01T10:00:00Z",
-  isPurchased: false,
+  isPurchased: true,
 };
 
 export const aceite: Ingredient = {

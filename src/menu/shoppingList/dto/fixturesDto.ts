@@ -1,7 +1,7 @@
 import type { IngredientDto, ShoppingListResponseDto } from "./types";
 
 export const tomatoDto: IngredientDto = {
-  _id: "1",
+  _id: "14fbf39d8c9d1e4dabc5f1e2",
   name: "Tomate",
   category: "Verdura",
   createdAt: "2025-10-01T10:00:00Z",

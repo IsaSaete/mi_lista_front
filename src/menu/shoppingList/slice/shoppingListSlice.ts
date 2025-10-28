@@ -22,12 +22,23 @@ const shoppingListSlice = createSlice({
       const newIngredient = action.payload;
       state.ingredients.push(newIngredient);
     },
+    togglePurchasedStatus: (state, action: PayloadAction<Ingredient>) => {
+      const ingredientId = action.payload.id;
+      const ingredientToToggled = state.ingredients.find(
+        (ingredient) => ingredient.id === ingredientId,
+      );
+
+      if (ingredientToToggled) {
+        ingredientToToggled.isPurchased = !ingredientToToggled.isPurchased;
+      }
+    },
   },
 });
 
 export const {
   loadIngredients: loadIngredientsCreator,
   addIngredient: addIngredientCreator,
+  togglePurchasedStatus: togglePurchasedStatusCreator,
 } = shoppingListSlice.actions;
 
 export const shoppingListReducer = shoppingListSlice.reducer;

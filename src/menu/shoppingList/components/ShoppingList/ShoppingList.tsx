@@ -21,12 +21,14 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
   const sectionClass =
     variant === "purchased" ? "bg-secondary" : "bg-secondary-hover ";
 
+  const textClass = variant === "purchased" ? "text-foreground" : "text-white";
+
   return (
     <>
       {title && <h3 className="pt-4 pb-0.5 font-medium">{title}</h3>}
       <section className={`${sectionClass} rounded-2xl p-6 flex-1`}>
         {ingredients.length === 0 ? (
-          <p role="status" className="text-foreground/60 text-center">
+          <p role="status" className={`${textClass} text-center`}>
             No hay ingredientes en la lista
           </p>
         ) : (
@@ -38,7 +40,7 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
               >
                 <button
                   onClick={() => handleToggle(ingredient)}
-                  className=" px-3 py-0.5 text-left"
+                  className=" px-3 py-0.5 text-left "
                   aria-label={
                     ingredient.isPurchased
                       ? `Añadir ${ingredient.name} a la lista`

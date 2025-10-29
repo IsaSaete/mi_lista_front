@@ -5,7 +5,8 @@ import ShoppingListClient from "../client/ShoppingListClient";
 import {
   addIngredientCreator,
   loadIngredientsCreator,
-  togglePurchasedStatusCreator,
+  togglePurchasedStatusOptimisticCreator,
+  updateIngredientFromServerCreator,
 } from "../slice/shoppingListSlice";
 import type { IngredientSendFormData } from "@/menu/types";
 
@@ -42,10 +43,21 @@ const useShoppingList = () => {
   );
 
   const togglePurchasedStatus = async (ingredientId: string): Promise<void> => {
-    const updatedIngredient =
-      await shoppingListClient.togglePurchasedStatus(ingredientId);
+    const ingredientBeforeToggle = ingredients.find(
+      (ingredient) => ingredient.id === ingredientId,
+    );
+    if (!ingredientBeforeToggle) return;
 
-    dispatch(togglePurchasedStatusCreator(updatedIngredient));
+    dispatch(togglePurchasedStatusOptimisticCreator(ingredientId));
+
+    try {
+      const updatedIngredient =
+        await shoppingListClient.togglePurchasedStatus(ingredientId);
+
+      dispatch(updateIngredientFromServerCreator(updatedIngredient));
+    } catch {
+      dispatch(updateIngredientFromServerCreator(ingredientBeforeToggle));
+    }
   };
 
   return {

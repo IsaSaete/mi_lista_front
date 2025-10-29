@@ -22,14 +22,26 @@ const shoppingListSlice = createSlice({
       const newIngredient = action.payload;
       state.ingredients.push(newIngredient);
     },
-    togglePurchasedStatus: (state, action: PayloadAction<Ingredient>) => {
-      const ingredientId = action.payload.id;
+    togglePurchasedStatusOptimistic: (state, action: PayloadAction<string>) => {
+      const ingredientId = action.payload;
       const ingredientToToggled = state.ingredients.find(
         (ingredient) => ingredient.id === ingredientId,
       );
 
       if (ingredientToToggled) {
         ingredientToToggled.isPurchased = !ingredientToToggled.isPurchased;
+        ingredientToToggled.createdAt = new Date().toISOString();
+      }
+    },
+    updateIngredientFromServer: (state, action: PayloadAction<Ingredient>) => {
+      const updatedIngredientId = action.payload.id;
+      const updatedIngredient = state.ingredients.find(
+        (ingredient) => ingredient.id === updatedIngredientId,
+      );
+
+      if (updatedIngredient) {
+        updatedIngredient.isPurchased = action.payload.isPurchased;
+        updatedIngredient.createdAt = action.payload.createdAt;
       }
     },
   },
@@ -38,7 +50,8 @@ const shoppingListSlice = createSlice({
 export const {
   loadIngredients: loadIngredientsCreator,
   addIngredient: addIngredientCreator,
-  togglePurchasedStatus: togglePurchasedStatusCreator,
+  togglePurchasedStatusOptimistic: togglePurchasedStatusOptimisticCreator,
+  updateIngredientFromServer: updateIngredientFromServerCreator,
 } = shoppingListSlice.actions;
 
 export const shoppingListReducer = shoppingListSlice.reducer;

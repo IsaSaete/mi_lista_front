@@ -4,23 +4,18 @@ import ShoppingList from "@/menu/shoppingList/components/ShoppingList/ShoppingLi
 import IngredientForm from "../../components/IngredientForm/IngredientForm";
 import useShoppingList from "../../hooks/useShoppingList";
 import Loader from "@/UI/components/Loader/Loader";
+import { useSelector } from "react-redux";
+import { selectSeparatedIngredients } from "../../slice/shoppingListSelector";
 
 const ShoppingListPage = () => {
-  const { ingredients, loadIngredients, isLoading, addIngredient } =
-    useShoppingList();
+  const { loadIngredients, isLoading, addIngredient } = useShoppingList();
+  const { purchasedIngredients, toBuyIngredients } = useSelector(
+    selectSeparatedIngredients,
+  );
 
   useEffect(() => {
     loadIngredients();
   }, [loadIngredients]);
-
-  const ingredientsNotPurchased = ingredients.filter(
-    (ingredient) => !ingredient.isPurchased,
-  );
-
-  const ingredientsPurchased = ingredients
-    .filter((ingredient) => ingredient.isPurchased)
-    .slice(-6)
-    .reverse();
 
   return (
     <>
@@ -28,13 +23,10 @@ const ShoppingListPage = () => {
       {isLoading ? (
         <Loader message="Cargando ingredientes" />
       ) : (
-        <ShoppingList
-          ingredients={ingredientsNotPurchased}
-          variant="notPurchased"
-        />
+        <ShoppingList ingredients={toBuyIngredients} variant="notPurchased" />
       )}
       <ShoppingList
-        ingredients={ingredientsPurchased}
+        ingredients={purchasedIngredients}
         variant="purchased"
         title="Comprados recientemente:"
       />

@@ -32,7 +32,10 @@ describe("Given the togglePurchasedStatus function", () => {
       const ingredients = result.current.ingredients;
 
       expect(ingredients).toContainEqual(
-        expect.objectContaining({ name: tomato.name, isPurchased: false }),
+        expect.objectContaining({
+          name: tomato.name,
+          isPurchased: tomato.isPurchased,
+        }),
       );
     });
   });

@@ -7,7 +7,7 @@ const Navigation: React.FC = () => {
       <NavLink
         to="/menu-semanal"
         className="max-w-[320px] w-full bg-secondary p-4 text-inherit rounded-[10px] text-[1.8rem] font-medium uppercase 
-          flex items-center justify-between gap-5 text-left transition-transform duration-300 ease-in-out 
+          flex items-center justify-between transition-transform duration-300 ease-in-out 
           shadow-md hover:bg-primary-hover  hover:scale-105 focus:outline-none focus:ring-3 focus:ring-secondary-hover"
       >
         <span className="text-2xl font-semibold text-foreground">

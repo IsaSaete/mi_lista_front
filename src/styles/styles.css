@@ -7,6 +7,7 @@
   --primary-hover: #ff8270;
   --secondary-color: #b2ccb6;
   --secondary-hover: #1a5e55;
+  --error: #931a1a;
 }
 
 .dark {
@@ -27,6 +28,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-secondary: var(--secondary-color);
   --color-secondary-hover: var(--secondary-hover);
+  --color-error: var(--error);
 }
 
 @layer base {

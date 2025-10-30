@@ -25,11 +25,16 @@ const ShoppingListPage = () => {
       ) : (
         <ShoppingList ingredients={toBuyIngredients} variant="notPurchased" />
       )}
-      <ShoppingList
-        ingredients={purchasedIngredients}
-        variant="purchased"
-        title="Comprados recientemente:"
-      />
+      {isLoading ? (
+        <Loader message="Cargando ingredientes" />
+      ) : (
+        <ShoppingList
+          ingredients={purchasedIngredients}
+          variant="purchased"
+          title="Comprados recientemente:"
+        />
+      )}
+
       <IngredientForm addIngredient={addIngredient} />
     </>
   );

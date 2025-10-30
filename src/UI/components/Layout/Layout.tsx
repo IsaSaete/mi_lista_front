@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
+import { Toaster } from "@/components/ui/sonner";
 
 const Layout: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const Layout: React.FC = () => {
       <main className="flex-1 overflow-auto p-4 ">
         <Outlet />
       </main>
+      <Toaster />
     </div>
   );
 };

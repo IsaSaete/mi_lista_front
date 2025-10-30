@@ -3,7 +3,11 @@ import { toast } from "sonner";
 
 type ToastType = "success" | "error";
 
-const showToast = (type: ToastType, title: string, description?: string) => {
+const showToast = (
+  type: ToastType,
+  title: string,
+  description?: string,
+): void => {
   const icons: Record<ToastType, React.ReactNode> = {
     success: (
       <CheckCircle
@@ -33,8 +37,8 @@ const showToast = (type: ToastType, title: string, description?: string) => {
       >
         <span>{icons[type]}</span>
         <div className="flex-1">
-          <p className="font-semibold">{title}</p>
-          <p className="text-sm pt-2">{description}</p>
+          <h3 className="font-semibold">{title}</h3>
+          {description && <p className="text-sm pt-2">{description}</p>}
         </div>
         <button
           className="text-sm font-medium shadow-xl text-white hover:scale-105 transition-transform duration-300 ease-in-out bg-secondary-hover py-2 px-3 rounded-md focus:outline-none focus:ring-3 focus:ring-primary"
@@ -46,7 +50,7 @@ const showToast = (type: ToastType, title: string, description?: string) => {
       </div>
     ),
     {
-      duration: 5_000,
+      duration: 30_000,
       position: "top-center",
     },
   );

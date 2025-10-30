@@ -9,6 +9,7 @@ import {
   updateIngredientFromServerCreator,
 } from "../slice/shoppingListSlice";
 import type { IngredientSendFormData } from "@/menu/types";
+import showToast from "@/UI/toast/showToast";
 
 const useShoppingList = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,11 @@ const useShoppingList = () => {
 
         dispatch(addIngredientCreator(addIngredient));
       } catch {
-        throw Error;
+        showToast(
+          "error",
+          "Error al añadir el ingrediente",
+          "Inténtelo de nuevo",
+        );
       }
     },
 
@@ -55,7 +60,14 @@ const useShoppingList = () => {
         await shoppingListClient.togglePurchasedStatus(ingredientId);
 
       dispatch(updateIngredientFromServerCreator(updatedIngredient));
+      showToast("success", "Ingrediente añadido");
     } catch {
+      showToast(
+        "error",
+        "Error al modificar el ingrediente",
+        "Inténtelo de nuevo",
+      );
+
       dispatch(updateIngredientFromServerCreator(ingredientBeforeToggle));
     }
   };

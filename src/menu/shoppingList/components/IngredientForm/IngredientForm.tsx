@@ -1,5 +1,5 @@
-import type { IngredientSendFormData } from "@/menu/types";
 import React, { useState } from "react";
+import type { IngredientSendFormData } from "@/menu/types";
 
 interface IngredientFormProps {
   addIngredient: (nameIngredient: IngredientSendFormData) => void;

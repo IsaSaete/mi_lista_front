@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import WorkInProgressPage from "./WorkInProgressPage";
 import { MemoryRouter } from "react-router";
+import WorkInProgressPage from "./WorkInProgressPage";
 
 describe("Given the WorkInProgressPage component", () => {
   describe("When it renders", () => {

@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
-import ShoppingListPage from "./ShoppingListPage";
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
+import { render, screen } from "@testing-library/react";
+import ShoppingListPage from "./ShoppingListPage";
 import store from "@/store/store";
 
 describe("Given the ShoppingListPage component", () => {

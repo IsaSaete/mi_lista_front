@@ -1,9 +1,9 @@
+import { http, HttpResponse } from "msw";
 import type { IngredientSendFormData } from "@/menu/types";
 import ShoppingListClient from "../ShoppingListClient";
 import { mapIngredientDtoToIngredient } from "../../dto/mapper";
 import { albahacaDto } from "../../dto/fixturesDto";
 import { server } from "@/setupTests";
-import { http, HttpResponse } from "msw";
 
 describe("Given the addIngredient methos of ShoppingListClient", () => {
   describe("When it`s called with the name of ingredient 'Albahaca'", () => {

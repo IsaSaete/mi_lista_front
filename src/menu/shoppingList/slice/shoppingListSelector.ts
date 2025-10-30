@@ -1,6 +1,6 @@
+import { createSelector } from "@reduxjs/toolkit";
 import type { Ingredient } from "@/menu/types";
 import type { RootState } from "@/store/store";
-import { createSelector } from "@reduxjs/toolkit";
 
 export const selectSeparatedIngredients = createSelector(
   (state: RootState): Ingredient[] => state.shoppingList.ingredients,

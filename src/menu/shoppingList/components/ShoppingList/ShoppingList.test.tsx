@@ -1,7 +1,7 @@
-import { albahaca, tomato } from "@/mockData/ingredients";
-import { render, screen } from "@testing-library/react";
-import ShoppingList from "./ShoppingList";
 import { Provider } from "react-redux";
+import { render, screen } from "@testing-library/react";
+import { albahaca, tomato } from "@/mockData/ingredients";
+import ShoppingList from "./ShoppingList";
 import store from "@/store/store";
 
 describe("Given the ShoppingList component", () => {

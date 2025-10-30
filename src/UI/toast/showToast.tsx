@@ -50,7 +50,7 @@ const showToast = (
       </div>
     ),
     {
-      duration: 30_000,
+      duration: 3_000,
       position: "top-center",
     },
   );

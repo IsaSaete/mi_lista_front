@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
 import IngredientForm from "./IngredientForm";
-import { MemoryRouter } from "react-router";
 
 describe("Given the IngredientForm componente", () => {
   const action = vitest.fn();

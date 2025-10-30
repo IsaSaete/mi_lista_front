@@ -1,5 +1,5 @@
-import { shoppingListReducer } from "@/menu/shoppingList/slice/shoppingListSlice";
 import { configureStore } from "@reduxjs/toolkit";
+import { shoppingListReducer } from "@/menu/shoppingList/slice/shoppingListSlice";
 
 const store = configureStore({
   reducer: { shoppingList: shoppingListReducer },

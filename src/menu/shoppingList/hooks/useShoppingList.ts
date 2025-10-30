@@ -1,6 +1,6 @@
-import { useAppSelector } from "@/store/hooks";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/store/hooks";
 import ShoppingListClient from "../client/ShoppingListClient";
 import {
   addIngredientCreator,
@@ -51,6 +51,7 @@ const useShoppingList = () => {
     const ingredientBeforeToggle = ingredients.find(
       (ingredient) => ingredient.id === ingredientId,
     );
+
     if (!ingredientBeforeToggle) return;
 
     dispatch(togglePurchasedStatusOptimisticCreator(ingredientId));
@@ -60,7 +61,6 @@ const useShoppingList = () => {
         await shoppingListClient.togglePurchasedStatus(ingredientId);
 
       dispatch(updateIngredientFromServerCreator(updatedIngredient));
-      showToast("success", "Ingrediente añadido");
     } catch {
       showToast(
         "error",

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import DaySelector from "./DaySelector";
 import { MemoryRouter } from "react-router";
+import DaySelector from "./DaySelector";
 
 describe("Given the DaySelector component", () => {
   describe("When it renders", () => {

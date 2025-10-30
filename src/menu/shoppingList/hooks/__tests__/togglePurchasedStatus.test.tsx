@@ -1,9 +1,9 @@
+import { act, renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router";
+import { Provider } from "react-redux";
 import { tomato } from "@/mockData/ingredients";
 import type { ShoppingListState } from "../../slice/types";
 import setupStore from "@/store/setupStore";
-import { MemoryRouter } from "react-router";
-import { Provider } from "react-redux";
-import { act, renderHook } from "@testing-library/react";
 import useShoppingList from "../useShoppingList";
 
 describe("Given the togglePurchasedStatus function", () => {

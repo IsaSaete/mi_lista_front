@@ -44,6 +44,15 @@ const shoppingListSlice = createSlice({
         updatedIngredient.createdAt = action.payload.createdAt;
       }
     },
+    deleteIngredient: (state, action: PayloadAction<string>) => {
+      const ingredientId = action.payload;
+
+      const updatedIngredients = state.ingredients.filter(
+        (ingredient) => ingredient.id !== ingredientId,
+      );
+
+      state.ingredients = updatedIngredients;
+    },
   },
 });
 
@@ -52,6 +61,7 @@ export const {
   addIngredient: addIngredientCreator,
   togglePurchasedStatusOptimistic: togglePurchasedStatusOptimisticCreator,
   updateIngredientFromServer: updateIngredientFromServerCreator,
+  deleteIngredient: deletedIngredientCreator,
 } = shoppingListSlice.actions;
 
 export const shoppingListReducer = shoppingListSlice.reducer;

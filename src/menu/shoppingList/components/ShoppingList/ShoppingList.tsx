@@ -1,5 +1,7 @@
 import type { Ingredient } from "@/menu/types";
 import useShoppingList from "../../hooks/useShoppingList";
+import { useState } from "react";
+import { Pencil, Trash2 } from "lucide-react";
 
 interface ShoppingListProps {
   ingredients: Ingredient[];
@@ -12,10 +14,23 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
   title,
   variant,
 }) => {
-  const { togglePurchasedStatus } = useShoppingList();
+  const [isEditing, setIsEditing] = useState(false);
+  const { togglePurchasedStatus, deleteIngredientById } = useShoppingList();
 
   const handleToggle = (ingredient: Ingredient) => {
     togglePurchasedStatus(ingredient.id);
+  };
+
+  const handleDeleteIngredient = (ingredientId: string): void => {
+    deleteIngredientById(ingredientId);
+  };
+
+  const selectedEdit = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+
+    setIsEditing((previousState) => !previousState);
   };
 
   const sectionClass =
@@ -25,7 +40,18 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
 
   return (
     <>
-      {title && <h3 className="pt-4 pb-0.5 font-medium">{title}</h3>}
+      {title && (
+        <div className="flex justify-between items-baseline">
+          <h3 className="pt-4 pb-0.5 font-medium mx-2">{title}</h3>
+          <button
+            aria-label={`Editar la lista de ${title}`}
+            onClick={selectedEdit}
+            className="px-1 active:scale-115 transition-transform duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-primary rounded-2xl"
+          >
+            <Pencil width={20} height={20} className="mx-2" />
+          </button>
+        </div>
+      )}
       <section className={`${sectionClass} rounded-2xl p-6 flex-1`}>
         {ingredients.length === 0 ? (
           <p role="status" className={`${textClass} text-center`}>
@@ -36,19 +62,30 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
             {ingredients.map((ingredient) => (
               <li
                 key={ingredient.id}
-                className="flex w-full bg-background rounded-xl items-stretch"
+                className="flex w-full bg-background rounded-xl justify-between items-center"
               >
                 <button
                   onClick={() => handleToggle(ingredient)}
-                  className=" px-3 py-0.5 text-left "
+                  className={`px-3 py-0.5 focus:outline-none focus:ring-4 focus:ring-primary rounded-2xl ${isEditing ? "w-auto" : "w-full justify-start"}`}
                   aria-label={
                     ingredient.isPurchased
-                      ? `Añadir ${ingredient.name} a la lista`
+                      ? `Marcar ${ingredient.name} para comprar`
                       : `Marcar ${ingredient.name} como comprado`
                   }
                 >
-                  <h3 className="text-foreground text-lg">{ingredient.name}</h3>
+                  <span className="text-lg ">{ingredient.name}</span>
                 </button>
+                {isEditing && (
+                  <div className="flex">
+                    <button
+                      aria-label={`Eliminar ${ingredient.name}`}
+                      className="px-3 py-0.5 active:scale-105 focus:outline-none focus:ring-4 focus:ring-primary rounded-2xl"
+                      onClick={() => handleDeleteIngredient(ingredient.id)}
+                    >
+                      <Trash2 width={22} height={22} />
+                    </button>
+                  </div>
+                )}
               </li>
             ))}
           </ul>

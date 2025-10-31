@@ -26,7 +26,11 @@ const useShoppingList = () => {
 
       dispatch(loadIngredientsCreator(ingredientsList));
     } catch {
-      dispatch(loadIngredientsCreator([]));
+      showToast(
+        "error",
+        "No se han podido cargar los ingredientes",
+        "Inténtelo de nuevo",
+      );
     }
   }, [shoppingListClient, dispatch]);
 

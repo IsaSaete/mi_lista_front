@@ -37,10 +37,12 @@ export const parmesano: Ingredient = {
   isPurchased: false,
 };
 
-export const ingredientsPrueba: Ingredient[] = [
+export const ingredientList: Ingredient[] = [
   tomato,
   aceite,
   espagueti,
   albahaca,
   parmesano,
 ];
+
+export const shoppingList: Ingredient[] = [tomato, albahaca, parmesano];

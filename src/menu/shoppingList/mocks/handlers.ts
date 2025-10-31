@@ -1,12 +1,13 @@
 import { http, HttpResponse } from "msw";
 import {
+  aceiteDto,
   albahacaDto,
   parmesanoDto,
   shoppingListResponseFixture,
   tomatoDto,
 } from "../dto/fixturesDto";
 import type { IngredientDto, ShoppingListResponseDto } from "../dto/types";
-import { parmesano } from "@/mockData/ingredients";
+import { aceite, parmesano } from "@/mockData/ingredients";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -38,6 +39,12 @@ export const shoppingListHandlers = [
   http.delete(`${apiUrl}/shopping-list/ingredients/${parmesano.id}`, () => {
     return HttpResponse.json<{ ingredient: IngredientDto }>({
       ingredient: parmesanoDto,
+    });
+  }),
+
+  http.delete(`${apiUrl}/shopping-list/ingredients/${aceite.id}`, () => {
+    return HttpResponse.json<{ ingredient: IngredientDto }>({
+      ingredient: aceiteDto,
     });
   }),
 ];

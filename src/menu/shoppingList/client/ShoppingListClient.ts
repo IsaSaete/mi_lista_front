@@ -83,8 +83,8 @@ class ShoppingListClient implements ShoppingListClientStructure {
       },
     );
 
-    if (!response) {
-      throw new Error("Error deleting ingredienrt");
+    if (!response.ok) {
+      throw new Error("Error deleting ingredient");
     }
 
     const { ingredient } = (await response.json()) as ResponseIngredientDto;

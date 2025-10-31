@@ -9,28 +9,28 @@ export const tomatoDto: IngredientDto = {
 };
 
 export const aceiteDto: IngredientDto = {
-  _id: "2",
+  _id: "14fbf39d8c9d1e4dabc5f122",
   name: "Aceite de oliva virgen extra",
   category: "Aceite",
   createdAt: "2025-10-02T12:15:00Z",
   isPurchased: false,
 };
 export const espaguetiDto: IngredientDto = {
-  _id: "3",
+  _id: "14fbf39d8c9d1e4dabc5f123",
   name: "Pasta espagueti",
   category: "Cereal",
   createdAt: "2025-10-03T09:30:00Z",
   isPurchased: false,
 };
 export const albahacaDto: IngredientDto = {
-  _id: "4",
+  _id: "14fbf39d8c9d1e4dabc5f1224",
   name: "Albahaca",
   category: "Hierba aromática",
   createdAt: "2025-10-05T08:45:00Z",
   isPurchased: false,
 };
 export const parmesanoDto: IngredientDto = {
-  _id: "5",
+  _id: "14fbf39d8c9d1e4dabc5f1225",
   name: "Queso parmesano",
   category: "Lácteo",
   createdAt: "2025-10-06T17:20:00Z",

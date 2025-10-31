@@ -4,6 +4,7 @@ import { useAppSelector } from "@/store/hooks";
 import ShoppingListClient from "../client/ShoppingListClient";
 import {
   addIngredientCreator,
+  deletedIngredientCreator,
   loadIngredientsCreator,
   togglePurchasedStatusOptimisticCreator,
   updateIngredientFromServerCreator,
@@ -22,9 +23,14 @@ const useShoppingList = () => {
   const loadIngredients = useCallback(async (): Promise<void> => {
     try {
       const ingredientsList = await shoppingListClient.getShoppingList();
+
       dispatch(loadIngredientsCreator(ingredientsList));
     } catch {
-      dispatch(loadIngredientsCreator([]));
+      showToast(
+        "error",
+        "No se han podido cargar los ingredientes",
+        "Inténtelo de nuevo",
+      );
     }
   }, [shoppingListClient, dispatch]);
 
@@ -72,12 +78,30 @@ const useShoppingList = () => {
     }
   };
 
+  const deleteIngredientById = async (ingredientId: string): Promise<void> => {
+    try {
+      const deletedIngredient =
+        await shoppingListClient.deleteIngredient(ingredientId);
+
+      dispatch(deletedIngredientCreator(deletedIngredient.id));
+
+      showToast("success", "Ingrediente eliminado");
+    } catch {
+      showToast(
+        "error",
+        "El ingrediente no se ha podido eliminar",
+        "Inténtelo de nuevo",
+      );
+    }
+  };
+
   return {
     loadIngredients,
     ingredients,
     isLoading,
     addIngredient,
     togglePurchasedStatus,
+    deleteIngredientById,
   };
 };
 

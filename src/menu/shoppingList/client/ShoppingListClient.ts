@@ -71,6 +71,28 @@ class ShoppingListClient implements ShoppingListClientStructure {
 
     return updatedIngredient;
   };
+
+  public deleteIngredient = async (
+    ingredientId: string,
+  ): Promise<Ingredient> => {
+    const response = await fetch(
+      `${this.apiUrl}/shopping-list/ingredients/${ingredientId}`,
+      {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Error deleting ingredient");
+    }
+
+    const { ingredient } = (await response.json()) as ResponseIngredientDto;
+
+    const deletedIngredient = mapIngredientDtoToIngredient(ingredient);
+
+    return deletedIngredient;
+  };
 }
 
 export default ShoppingListClient;

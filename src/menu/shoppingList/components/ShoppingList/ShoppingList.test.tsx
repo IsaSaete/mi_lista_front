@@ -6,7 +6,7 @@ import store from "@/store/store";
 
 describe("Given the ShoppingList component", () => {
   describe("When it receives a 'Tomate, Albahaca fresca'", () => {
-    test("Then it should show the names inside a heading", () => {
+    test("Then it should show both ingredient names", () => {
       const expectedTomatoName = tomato.name;
       const expectedAlbahacaName = albahaca.name;
 
@@ -18,12 +18,8 @@ describe("Given the ShoppingList component", () => {
         </Provider>,
       );
 
-      const tomatoName = screen.getByRole("heading", {
-        name: expectedTomatoName,
-      });
-      const albahacaName = screen.getByRole("heading", {
-        name: expectedAlbahacaName,
-      });
+      const tomatoName = screen.getByText(expectedTomatoName);
+      const albahacaName = screen.getByText(expectedAlbahacaName);
 
       expect(tomatoName).toBeInTheDocument();
       expect(albahacaName).toBeInTheDocument();

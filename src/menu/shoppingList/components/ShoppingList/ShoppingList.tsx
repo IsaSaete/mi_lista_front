@@ -40,9 +40,9 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
 
   return (
     <>
-      {title && (
-        <div className="flex justify-between items-baseline">
-          <h3 className="pt-4 pb-0.5 font-medium mx-2">{title}</h3>
+      <div className="flex justify-between items-baseline">
+        <h3 className="pt-4 pb-0.5 font-medium mx-2">{title}</h3>
+        {ingredients.length !== 0 && (
           <button
             aria-label={`Editar la lista de ${title}`}
             onClick={selectedEdit}
@@ -50,8 +50,9 @@ const ShoppingList: React.FC<ShoppingListProps> = ({
           >
             <Pencil width={20} height={20} className="mx-2" />
           </button>
-        </div>
-      )}
+        )}
+      </div>
+
       <section className={`${sectionClass} rounded-2xl p-6 flex-1`}>
         {ingredients.length === 0 ? (
           <p role="status" className={`${textClass} text-center`}>

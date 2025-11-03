@@ -21,18 +21,24 @@ const ShoppingListPage = () => {
     <>
       <PageTitle title="lista de la compra" />
       {isLoading ? (
-        <Loader message="Cargando ingredientes" />
-      ) : (
-        <ShoppingList ingredients={toBuyIngredients} variant="notPurchased" />
-      )}
-      {isLoading ? (
-        <Loader message="Cargando ingredientes" />
+        <Loader message="Cargando ingredientes para comprar" />
       ) : (
         <ShoppingList
-          ingredients={purchasedIngredients}
-          variant="purchased"
-          title="Comprados recientemente:"
+          ingredients={toBuyIngredients}
+          variant="notPurchased"
+          title="Ingredientes por comprar:"
         />
+      )}
+      {isLoading ? (
+        <Loader message="Cargando ingredientes ya comprados" />
+      ) : (
+        purchasedIngredients.length !== 0 && (
+          <ShoppingList
+            ingredients={purchasedIngredients}
+            variant="purchased"
+            title="Ingredientes comprados:"
+          />
+        )
       )}
 
       <IngredientForm addIngredient={addIngredient} />

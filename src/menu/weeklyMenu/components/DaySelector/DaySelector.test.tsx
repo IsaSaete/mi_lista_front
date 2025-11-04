@@ -5,7 +5,9 @@ import DaySelector from "./DaySelector";
 describe("Given the DaySelector component", () => {
   describe("When it renders", () => {
     test("Then it should show a 7 buttons", () => {
-      render(<DaySelector />, { wrapper: MemoryRouter });
+      render(<DaySelector onDaySelect={() => {}} selectedDay="L" />, {
+        wrapper: MemoryRouter,
+      });
 
       const dayButtons = screen.getAllByRole("button");
 

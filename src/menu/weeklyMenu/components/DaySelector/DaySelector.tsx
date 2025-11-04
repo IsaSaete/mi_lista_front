@@ -1,14 +1,19 @@
 import React from "react";
-import { useSearchParams } from "react-router";
+import type { DayOfWeek } from "@/menu/types";
 
-const days: string[] = ["L", "M", "X", "J", "V", "S", "D"];
+const days: DayOfWeek[] = ["L", "M", "X", "J", "V", "S", "D"];
 
-const DaySelector: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const selectedDay = searchParams.get("dia") ?? "L";
+interface DaySelectorProps {
+  selectedDay: DayOfWeek;
+  onDaySelect: (day: DayOfWeek) => void;
+}
 
-  const handleClick = (dia: string) => {
-    setSearchParams({ dia });
+const DaySelector: React.FC<DaySelectorProps> = ({
+  onDaySelect,
+  selectedDay,
+}) => {
+  const handleClick = (day: DayOfWeek) => {
+    onDaySelect(day);
   };
 
   return (
@@ -22,7 +27,7 @@ const DaySelector: React.FC = () => {
             ${
               selectedDay === day
                 ? "bg-primary text-foreground scale-110 font-extrabold"
-                : "bg-secondary border-transparent text-foreground hover:bg-background hover:border-foreground"
+                : "bg-secondary border-transparent text-foreground hover:bg-secondary-hover hover:text-background hover:border-foreground"
             }
           `}
           aria-label={`Seleccionar ${day}`}

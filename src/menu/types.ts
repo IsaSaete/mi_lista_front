@@ -21,7 +21,7 @@ export type MealType = "comida" | "cena";
 
 export type DayOfWeek = "L" | "M" | "X" | "J" | "V" | "S" | "D";
 export interface Meal {
-  firstPlate: string;
+  firstPlate?: string;
   secondPlate?: string;
   dessert?: string;
 }

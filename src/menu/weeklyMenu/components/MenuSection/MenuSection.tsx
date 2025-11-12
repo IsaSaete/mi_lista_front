@@ -29,7 +29,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
           Ingredientes
         </button>
         <button
-          aria-label={meal ? "Editar receta" : "Añadir receta"}
+          aria-label={meal ? "Editar menú" : "Añadir menú"}
           className="bg-primary hover:bg-secondary font-semibold px-6 py-1 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-background"
         >
           {meal ? "Editar" : "Añadir"}

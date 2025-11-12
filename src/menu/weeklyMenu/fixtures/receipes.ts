@@ -1,6 +1,6 @@
 import type { WeeklyMenu } from "@/menu/types";
 
-export const prueba: WeeklyMenu = {
+export const weeklyMenuData: WeeklyMenu = {
   L: {
     lunch: {
       firstPlate: "Ensalada de quinoa con aguacate y tomate cherry.",

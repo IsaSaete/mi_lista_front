@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import WorkInProgressPage from "../pages/WorkInProgress/WorkInProgressPage";
 import HomePage from "../menu/pages/HomePage/HomePage";
 import App from "../UI/components/App/App";
-import MenuPage from "../menu/pages/MenuPage/MenuPage";
+import MenuPage from "../menu/weeklyMenu/pages/MenuPage/MenuPage";
 import ShoppingListPage from "../menu/shoppingList/pages/ShoppingListPage/ShoppingListPage";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 

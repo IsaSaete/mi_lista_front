@@ -1,5 +1,3 @@
-export type MenuType = "comida" | "cena";
-
 export interface Ingredient {
   id: string;
   name: string;
@@ -18,3 +16,19 @@ export type IngredientSendFormData = Omit<
   Ingredient,
   "id" | "category" | "isPurchased" | "createdAt"
 >;
+
+export type MealType = "comida" | "cena";
+
+export type DayOfWeek = "L" | "M" | "X" | "J" | "V" | "S" | "D";
+export interface Meal {
+  firstPlate: string;
+  secondPlate?: string;
+  dessert?: string;
+}
+
+export interface DayMenu {
+  lunch?: Meal;
+  dinner?: Meal;
+}
+
+export type WeeklyMenu = Record<DayOfWeek, DayMenu>;

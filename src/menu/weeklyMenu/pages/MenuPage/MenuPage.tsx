@@ -18,8 +18,8 @@ const MenuPage: React.FC = () => {
       <PageTitle title="Menú semanal" />
       <DaySelector selectedDay={day} onDaySelect={setDay} />
       <>
-        <MenuSection mealType="comida" meal={weeklyMenu[day].lunch} />
-        <MenuSection mealType="cena" meal={weeklyMenu[day].dinner} />
+        <MenuSection mealType="lunch" meal={weeklyMenu[day].lunch} />
+        <MenuSection mealType="dinner" meal={weeklyMenu[day].dinner} />
       </>
     </>
   );

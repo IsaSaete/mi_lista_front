@@ -1,6 +1,6 @@
 import type { WeeklyMenu } from "@/menu/types";
 import { http, HttpResponse } from "msw";
-import { weeklyMenuData } from "../fixtures/receipes";
+import { weeklyMenuData } from "../fixtures/recipes";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 

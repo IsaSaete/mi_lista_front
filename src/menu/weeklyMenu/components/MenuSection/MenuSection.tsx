@@ -7,6 +7,11 @@ interface MenuSectionProps {
   meal?: Meal;
 }
 
+const mealTypeLabels = {
+  lunch: "Comida",
+  dinner: "Cena",
+};
+
 const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
   const { isLoading } = useWeeklyMenu();
 
@@ -14,8 +19,8 @@ const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
 
   return (
     <div className="flex flex-col bg-secondary-hover rounded-2xl px-6 py-3 gap-4 mb-7">
-      <h3 className="text-3xl uppercase font-bold  text-center text-background">
-        - {mealType} -
+      <h3 className="text-3xl uppercase font-bold text-center text-background">
+        - {mealTypeLabels[mealType]} -
       </h3>
       {isLoading ? (
         <Loader message="Cargando menú" />
@@ -23,7 +28,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
         <div className="flex flex-col gap-3 bg-background p-4 rounded-2xl text-xl font-medium">
           {isMealEmpty ? (
             <p className="text-muted-foreground italic text-center">
-              {`No has añadido un menú para la ${mealType}`}
+              {`No has añadido un menú para la ${mealTypeLabels[mealType].toLowerCase()}`}
             </p>
           ) : (
             <>
@@ -42,7 +47,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
               {meal.dessert && (
                 <div>
                   <p className="font-bold text-lg">Postre</p>
-                  <p className="text-2xl">- {meal.dessert}</p>{" "}
+                  <p className="text-2xl">- {meal.dessert}</p>
                 </div>
               )}
             </>

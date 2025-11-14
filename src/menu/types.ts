@@ -17,7 +17,7 @@ export type IngredientSendFormData = Omit<
   "id" | "category" | "isPurchased" | "createdAt"
 >;
 
-export type MealType = "comida" | "cena";
+export type MealType = "lunch" | "dinner";
 
 export type DayOfWeek = "L" | "M" | "X" | "J" | "V" | "S" | "D";
 export interface Meal {

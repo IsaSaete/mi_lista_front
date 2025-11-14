@@ -1,4 +1,4 @@
-import { weeklyMenuData } from "../../fixtures/receipes";
+import { weeklyMenuData } from "../../fixtures/recipes";
 import WeeklyMenuClient from "../WeeklyMenuClient";
 
 describe("Given the getWeeklyMenu methos of WeekluMenuClient", () => {

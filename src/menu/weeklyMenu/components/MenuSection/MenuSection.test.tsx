@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import MenuSection from "./MenuSection";
-import { weeklyMenuData } from "../../fixtures/receipes";
+import { weeklyMenuData } from "../../fixtures/recipes";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 
@@ -11,7 +11,7 @@ describe("Given the MenuSection component", () => {
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="comida" meal={wednesdayLunch} />
+          <MenuSection mealType="lunch" meal={wednesdayLunch} />
         </Provider>,
       );
 
@@ -25,7 +25,7 @@ describe("Given the MenuSection component", () => {
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="comida" meal={wednesdayLunch} />
+          <MenuSection mealType="lunch" meal={wednesdayLunch} />
         </Provider>,
       );
 

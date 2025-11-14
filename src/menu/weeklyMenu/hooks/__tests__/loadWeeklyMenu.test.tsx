@@ -3,7 +3,7 @@ import { act, renderHook } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router";
 import useWeeklyMenu from "../useWeeklyMenu";
-import { weeklyMenuData } from "../../fixtures/receipes";
+import { weeklyMenuData } from "../../fixtures/recipes";
 
 describe("Given the loadWeeklyMenu function", () => {
   describe("When it's called", () => {

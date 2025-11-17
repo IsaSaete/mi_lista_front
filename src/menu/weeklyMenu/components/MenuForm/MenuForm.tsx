@@ -21,22 +21,24 @@ const MenuForm: React.FC<MenuFormProps> = ({
   selectedMealType,
   onClose,
 }) => {
-  const [dayLabel, setDayLabel] = useState(dayLabels[selectedDay]);
-  const [mealType, setMealType] = useState<MealType>(selectedMealType);
-  const [formData, setFormData] = useState<Meal>({
+  const initialMealData = {
     firstPlate: "",
     secondPlate: "",
     dessert: "",
-  });
+  };
+
+  const [dayLabel, setDayLabel] = useState(dayLabels[selectedDay]);
+  const [mealType, setMealType] = useState<MealType>(selectedMealType);
+  const [mealData, setMealData] = useState<Meal>(initialMealData);
 
   const handleMealTypeChange = (value: string) => {
     setMealType(value as MealType);
   };
 
-  const handleFormData = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMealData = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
-    setFormData((formData) => ({ ...formData, [event.target.id]: newValue }));
+    setMealData((formData) => ({ ...formData, [event.target.id]: newValue }));
   };
 
   return (
@@ -110,8 +112,8 @@ const MenuForm: React.FC<MenuFormProps> = ({
           <input
             type="text"
             id="firstPlate"
-            value={formData.firstPlate}
-            onChange={handleFormData}
+            value={mealData.firstPlate}
+            onChange={handleMealData}
             className="w-full border-secondary-hover border-2 rounded-lg px-2 py-1 text-foreground shadow-md focus:outline-none focus:ring-3 focus:ring-secondary-hover text-base"
           />
         </div>
@@ -122,8 +124,8 @@ const MenuForm: React.FC<MenuFormProps> = ({
           <input
             type="text"
             id="secondPlate"
-            value={formData.secondPlate}
-            onChange={handleFormData}
+            value={mealData.secondPlate}
+            onChange={handleMealData}
             className="w-full border-secondary-hover border-2 rounded-lg px-2 py-1 text-foreground shadow-md focus:outline-none focus:ring-3 focus:ring-secondary-hover text-base"
           />
         </div>
@@ -134,8 +136,8 @@ const MenuForm: React.FC<MenuFormProps> = ({
           <input
             type="text"
             id="dessert"
-            value={formData.dessert}
-            onChange={handleFormData}
+            value={mealData.dessert}
+            onChange={handleMealData}
             className="w-full border-secondary-hover border-2 rounded-lg px-2 py-1 text-foreground shadow-md focus:outline-none focus:ring-3 focus:ring-secondary-hover text-base"
           />
         </div>

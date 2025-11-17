@@ -1,18 +1,19 @@
 import type { MealType, Meal } from "@/menu/types";
 import useWeeklyMenu from "../../hooks/useWeeklyMenu";
 import Loader from "@/UI/components/Loader/Loader";
+import { mealTypeLabels } from "../../mapper/mappersMenu";
 
 interface MenuSectionProps {
   mealType: MealType;
   meal?: Meal;
+  onEdit: () => void;
 }
 
-const mealTypeLabels = {
-  lunch: "Comida",
-  dinner: "Cena",
-};
-
-const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
+const MenuSection: React.FC<MenuSectionProps> = ({
+  mealType,
+  meal,
+  onEdit,
+}) => {
   const { isLoading } = useWeeklyMenu();
 
   const isMealEmpty = !meal || Object.keys(meal).length === 0;
@@ -60,6 +61,7 @@ const MenuSection: React.FC<MenuSectionProps> = ({ mealType, meal }) => {
           Ingredientes
         </button>
         <button
+          onClick={onEdit}
           aria-label={meal ? "Editar menú" : "Añadir menú"}
           className="bg-primary hover:bg-secondary font-semibold px-6 py-1 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-background"
         >

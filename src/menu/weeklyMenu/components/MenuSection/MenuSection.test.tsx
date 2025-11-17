@@ -5,13 +5,15 @@ import { Provider } from "react-redux";
 import store from "@/store/store";
 
 describe("Given the MenuSection component", () => {
+  const action = vitest.fn();
+
   describe("When it renders with Wednesday`s lunch data", () => {
     test("Then it should show a 'comida' inside a heading", async () => {
       const wednesdayLunch = weeklyMenuData.X.lunch;
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="lunch" meal={wednesdayLunch} />
+          <MenuSection mealType="lunch" meal={wednesdayLunch} onEdit={action} />
         </Provider>,
       );
 
@@ -25,7 +27,7 @@ describe("Given the MenuSection component", () => {
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="lunch" meal={wednesdayLunch} />
+          <MenuSection mealType="lunch" meal={wednesdayLunch} onEdit={action} />
         </Provider>,
       );
 

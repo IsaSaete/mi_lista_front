@@ -18,6 +18,7 @@ export default defineConfig({
         "**/types.ts",
         "vite.config.ts",
         "src/setupTests.ts",
+        "src/components/ui/",
       ],
       provider: "v8",
       reporter: ["text", "html", "clover", "json", "lcov"],

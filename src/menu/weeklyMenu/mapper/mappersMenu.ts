@@ -15,7 +15,7 @@ export const dayKeys: Record<string, DayOfWeek> = {
   Martes: "M",
   Miércoles: "X",
   Jueves: "J",
-  Viérnes: "V",
+  Viernes: "V",
   Sábado: "S",
   Domingo: "D",
 };

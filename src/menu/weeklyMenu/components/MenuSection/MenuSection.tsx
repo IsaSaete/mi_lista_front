@@ -16,7 +16,8 @@ const MenuSection: React.FC<MenuSectionProps> = ({
 }) => {
   const { isLoading } = useWeeklyMenu();
 
-  const isMealEmpty = !meal || Object.keys(meal).length === 0;
+  const isMealEmpty =
+    !meal || (!meal.firstPlate && !meal.secondPlate && !meal.dessert);
 
   return (
     <div className="flex flex-col bg-secondary-hover rounded-2xl px-6 py-3 gap-4 mb-7">

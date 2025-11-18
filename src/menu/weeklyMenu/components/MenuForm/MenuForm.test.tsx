@@ -1,9 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import MenuForm from "./MenuForm";
 import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import store from "@/store/store";
+import MenuForm from "./MenuForm";
+import { weeklyMenuData } from "../../fixtures/recipes";
 
 describe("Given the MenuForm componente", () => {
   const action = vitest.fn();
+
+  beforeEach(() => {
+    action.mockClear();
+  });
 
   describe("When it renders with Lunch Monday", () => {
     test("Then it should show a 'Día de la semana' select and 'Lunes' value", () => {
@@ -11,7 +18,14 @@ describe("Given the MenuForm componente", () => {
       const expectedDay = "Lunes";
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const daysOptions = screen.getByRole("combobox", { name: expetedLabel });
@@ -25,7 +39,14 @@ describe("Given the MenuForm componente", () => {
       const expectedMealValue = /comida/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const mealOptions = screen.getByRole("combobox", { name: expectedMeal });
@@ -38,7 +59,14 @@ describe("Given the MenuForm componente", () => {
       const expectedLabel = /primer plato:/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const firstPlateTextBox = screen.getByLabelText(expectedLabel);
@@ -52,14 +80,19 @@ describe("Given the MenuForm componente", () => {
         const typeFirstPlate = "patatas con chorizo";
 
         render(
-          <MenuForm
-            onClose={action}
-            selectedDay="L"
-            selectedMealType="lunch"
-          />,
+          <Provider store={store}>
+            <MenuForm
+              onClose={action}
+              selectedDay="L"
+              selectedMealType="lunch"
+              weeklyMenu={weeklyMenuData}
+            />
+          </Provider>,
         );
 
         const firstPlateTextBox = screen.getByLabelText(expectedLabel);
+
+        await userEvent.clear(firstPlateTextBox);
 
         await userEvent.type(firstPlateTextBox, typeFirstPlate);
 
@@ -71,7 +104,14 @@ describe("Given the MenuForm componente", () => {
       const expectedLabel = /segundo plato:/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const secondPlateTextBox = screen.getByLabelText(expectedLabel);
@@ -83,7 +123,14 @@ describe("Given the MenuForm componente", () => {
       const expectedLabel = /postre:/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const dessertTextBox = screen.getByLabelText(expectedLabel);
@@ -95,7 +142,14 @@ describe("Given the MenuForm componente", () => {
       const expectedLabel = /volver/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const buttonText = screen.getByRole("button", { name: expectedLabel });
@@ -107,13 +161,49 @@ describe("Given the MenuForm componente", () => {
       const expectedLabel = /guardar/i;
 
       render(
-        <MenuForm onClose={action} selectedDay="L" selectedMealType="lunch" />,
+        <Provider store={store}>
+          <MenuForm
+            onClose={action}
+            selectedDay="L"
+            selectedMealType="lunch"
+            weeklyMenu={weeklyMenuData}
+          />
+        </Provider>,
       );
 
       const buttonText = screen.getByText(expectedLabel);
       const saveButton = buttonText.closest("button");
 
       expect(saveButton).toBeInTheDocument();
+    });
+
+    describe("And the user click on 'Guardar'", () => {
+      test("Then it should call the button action", async () => {
+        const expectedLabel = /segundo plato:/i;
+        const expectedLabelButton = /guardar menú/i;
+
+        render(
+          <Provider store={store}>
+            <MenuForm
+              onClose={action}
+              selectedDay="L"
+              selectedMealType="lunch"
+              weeklyMenu={weeklyMenuData}
+            />
+          </Provider>,
+        );
+
+        const secondPlateTextBox = screen.getByLabelText(expectedLabel);
+
+        await userEvent.clear(secondPlateTextBox);
+        await userEvent.type(secondPlateTextBox, "Filetes rusos");
+
+        const saveButton = screen.getByLabelText(expectedLabelButton);
+
+        await userEvent.click(saveButton);
+
+        expect(action).toHaveBeenCalled();
+      });
     });
   });
 });

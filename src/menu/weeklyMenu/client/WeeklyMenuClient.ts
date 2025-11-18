@@ -1,4 +1,4 @@
-import type { WeeklyMenu } from "@/menu/types";
+import type { UpdateMeal, UpdateMealResponse, WeeklyMenu } from "@/menu/types";
 import type { WeeklyMenuClientStructure } from "./types";
 
 class WeeklyMenuClient implements WeeklyMenuClientStructure {
@@ -14,6 +14,24 @@ class WeeklyMenuClient implements WeeklyMenuClientStructure {
     const weeklyMenuData = (await response.json()) as WeeklyMenu;
 
     return weeklyMenuData;
+  };
+
+  public updateMeal = async (
+    newMeal: UpdateMeal,
+  ): Promise<UpdateMealResponse> => {
+    const response = await fetch(`${this.apiUrl}/weekly-menu`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newMeal),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error updating meal");
+    }
+
+    const updateMeal = (await response.json()) as UpdateMealResponse;
+
+    return updateMeal;
   };
 }
 

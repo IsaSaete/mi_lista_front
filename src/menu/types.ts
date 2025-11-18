@@ -33,6 +33,18 @@ export interface DayMenu {
 
 export type WeeklyMenu = Record<DayOfWeek, DayMenu>;
 
+export type UpdateMeal = {
+  day: DayOfWeek;
+  mealType: MealType;
+  mealData: Meal;
+};
+
+export type UpdateMealResponse = {
+  weeklyMenu: {
+    [key in DayOfWeek]?: DayMenu;
+  };
+};
+
 export type EditingMeal = {
   day: DayOfWeek;
   mealType: MealType;

@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import MenuPage from "./MenuPage";
 import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import userEvent from "@testing-library/user-event";
+import MenuPage from "./MenuPage";
 
 describe("Given the MenuPage component", () => {
   describe("When it renders", () => {

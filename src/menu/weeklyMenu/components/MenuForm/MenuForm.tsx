@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -6,30 +7,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { type Meal, type DayOfWeek, type MealType } from "@/menu/types";
-import { useState } from "react";
-import { dayLabels } from "../../mapper/mappersMenu";
+import {
+  type Meal,
+  type DayOfWeek,
+  type MealType,
+  type WeeklyMenu,
+  type UpdateMeal,
+} from "@/menu/types";
+import { dayKeys, dayLabels } from "../../mapper/mappersMenu";
+import useWeeklyMenu from "../../hooks/useWeeklyMenu";
 
 interface MenuFormProps {
   selectedDay: DayOfWeek;
   selectedMealType: MealType;
   onClose: () => void;
+  weeklyMenu: WeeklyMenu;
 }
 
 const MenuForm: React.FC<MenuFormProps> = ({
   selectedDay,
   selectedMealType,
   onClose,
+  weeklyMenu,
 }) => {
-  const initialMealData = {
-    firstPlate: "",
-    secondPlate: "",
-    dessert: "",
-  };
-
   const [dayLabel, setDayLabel] = useState(dayLabels[selectedDay]);
   const [mealType, setMealType] = useState<MealType>(selectedMealType);
+  const initialMealData = weeklyMenu[selectedDay]?.[selectedMealType] || {};
   const [mealData, setMealData] = useState<Meal>(initialMealData);
+  const { updateMeal } = useWeeklyMenu();
 
   const handleMealTypeChange = (value: string) => {
     setMealType(value as MealType);
@@ -41,8 +46,27 @@ const MenuForm: React.FC<MenuFormProps> = ({
     setMealData((formData) => ({ ...formData, [event.target.id]: newValue }));
   };
 
+  const onSubmitMenuForm = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
+    event.preventDefault();
+
+    const dayKey = dayKeys[dayLabel];
+    const newMeal: UpdateMeal = {
+      day: dayKey,
+      mealType,
+      mealData,
+    };
+
+    await updateMeal(newMeal);
+    onClose();
+  };
+
   return (
-    <form className="bg-background border-secondary-hover border-3 text-background p-6 rounded-2xl shadow-md max-w-md mx-auto space-y-3">
+    <form
+      onSubmit={onSubmitMenuForm}
+      className="bg-background border-secondary-hover border-3 text-background p-6 rounded-2xl shadow-md max-w-md mx-auto space-y-3"
+    >
       <div className="flex flex-col gap-1">
         <label htmlFor="day" className="font-medium text-xl text-foreground">
           Día de la semana

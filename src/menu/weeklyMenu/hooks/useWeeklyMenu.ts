@@ -2,8 +2,12 @@ import { useAppSelector } from "@/store/hooks";
 import { useDispatch } from "react-redux";
 import WeeklyMenuClient from "../client/WeeklyMenuClient";
 import { useCallback, useMemo } from "react";
-import { loadWeeklyMenuCreator } from "../slice/weeklyMenuSlice";
+import {
+  loadWeeklyMenuCreator,
+  updateMealCreator,
+} from "../slice/weeklyMenuSlice";
 import showToast from "@/UI/toast/showToast";
+import type { UpdateMeal } from "@/menu/types";
 
 const useWeeklyMenu = () => {
   const dispatch = useDispatch();
@@ -26,7 +30,21 @@ const useWeeklyMenu = () => {
     }
   }, [weeklyMenuClient, dispatch]);
 
-  return { loadWeeklyMenu, weeklyMenu, isLoading };
+  const updateMeal = async (meal: UpdateMeal): Promise<void> => {
+    try {
+      await weeklyMenuClient.updateMeal(meal);
+
+      dispatch(updateMealCreator(meal));
+    } catch {
+      showToast(
+        "error",
+        "No se ha podido actualizar el menú",
+        "Inténtelo de nuevo",
+      );
+    }
+  };
+
+  return { loadWeeklyMenu, weeklyMenu, isLoading, updateMeal };
 };
 
 export default useWeeklyMenu;

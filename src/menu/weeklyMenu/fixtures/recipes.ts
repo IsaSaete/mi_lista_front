@@ -1,4 +1,4 @@
-import type { WeeklyMenu } from "@/menu/types";
+import type { UpdateMeal, UpdateMealResponse, WeeklyMenu } from "@/menu/types";
 
 export const weeklyMenuData: WeeklyMenu = {
   L: {
@@ -71,4 +71,14 @@ export const weeklyMenuData: WeeklyMenu = {
       firstPlate: "Crema de calabacín con picatostes.",
     },
   },
+};
+
+export const mondayLunch: UpdateMeal = {
+  day: "L",
+  mealType: "lunch",
+  mealData: { firstPlate: "Lentejas estofadas" },
+};
+
+export const mondayLunchDto: UpdateMealResponse = {
+  weeklyMenu: { L: { lunch: { firstPlate: "Lentejas estofadas" } } },
 };

@@ -21,7 +21,7 @@ const ShoppingListPage = () => {
     <>
       <PageTitle title="lista de la compra" />
       {isLoading ? (
-        <Loader message="Cargando ingredientes para comprar" />
+        <Loader message="Cargando ingredientes por comprar" />
       ) : (
         <ShoppingList
           ingredients={toBuyIngredients}

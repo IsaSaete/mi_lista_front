@@ -7,7 +7,7 @@ describe("Given the Navigation component", () => {
     test("Then it should show a 'MENÚ SEMANAL' link", () => {
       const expectedLink = /menú semanal/i;
 
-      render(<Navigation />, { wrapper: MemoryRouter });
+      render(<Navigation isMobile={false} />, { wrapper: MemoryRouter });
 
       const menuLink = screen.getByRole("link", { name: expectedLink });
 
@@ -17,7 +17,7 @@ describe("Given the Navigation component", () => {
     test("Then it should show a 'MI CESTA' link", () => {
       const expectedLink = /mi cesta/i;
 
-      render(<Navigation />, { wrapper: MemoryRouter });
+      render(<Navigation isMobile={false} />, { wrapper: MemoryRouter });
 
       const cartLink = screen.getByRole("link", { name: expectedLink });
 
@@ -27,11 +27,11 @@ describe("Given the Navigation component", () => {
     test("Then it should show a 'RECETAS' link", () => {
       const expectedLink = /recetas/i;
 
-      render(<Navigation />, { wrapper: MemoryRouter });
+      render(<Navigation isMobile={false} />, { wrapper: MemoryRouter });
 
-      const menuLink = screen.getByRole("link", { name: expectedLink });
+      const recipesLink = screen.getByRole("link", { name: expectedLink });
 
-      expect(menuLink).toBeInTheDocument();
+      expect(recipesLink).toBeInTheDocument();
     });
   });
 });

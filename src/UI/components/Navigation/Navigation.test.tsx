@@ -29,9 +29,9 @@ describe("Given the Navigation component", () => {
 
       render(<Navigation isMobile={false} />, { wrapper: MemoryRouter });
 
-      const menuLink = screen.getByRole("link", { name: expectedLink });
+      const recipesLink = screen.getByRole("link", { name: expectedLink });
 
-      expect(menuLink).toBeInTheDocument();
+      expect(recipesLink).toBeInTheDocument();
     });
   });
 });

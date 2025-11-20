@@ -16,6 +16,7 @@ const BurguerMenu: React.FC = () => {
   return (
     <>
       <button
+        aria-label="Abrir menú"
         onClick={handleOpen}
         className="focus:outline-none focus:ring-3 focus:ring-secondary-hover"
       >
@@ -27,7 +28,6 @@ const BurguerMenu: React.FC = () => {
           <button
             className="absolute inset-0 bg-black/70 w-full max-w-[500px] mx-auto"
             onClick={closeBurgerMenu}
-            aria-label="Cerrar menú"
           />
           <div className="absolute left-0 top-0 h-full w-[75%] max-w-[400px] min-w-[300px] bg-background shadow-lg">
             <button

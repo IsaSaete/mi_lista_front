@@ -7,15 +7,21 @@ import useWeeklyMenu from "../../hooks/useWeeklyMenu";
 import FormModal from "@/UI/components/Modal/FormModal";
 import MenuForm from "../../components/MenuForm/MenuForm";
 import { dayLabels, mealTypeLabels } from "../../mapper/mappersMenu";
+import { useSearchParams } from "react-router";
 
 const MenuPage: React.FC = () => {
   const { weeklyMenu, loadWeeklyMenu } = useWeeklyMenu();
-  const [day, setDay] = useState<DayOfWeek>("L");
   const [selectedMeal, setSelectedMeal] = useState<EditingMeal>({
     day: "L",
     mealType: "lunch",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const day = (searchParams.get("day") as DayOfWeek) || "L";
+
+  const handleDaySelect = (selectedDay: DayOfWeek) => {
+    setSearchParams({ day: selectedDay });
+  };
 
   const handleMealSelection = (day: DayOfWeek, mealType: MealType) => {
     setSelectedMeal({ day, mealType });
@@ -62,7 +68,7 @@ const MenuPage: React.FC = () => {
   return (
     <>
       <PageTitle title="Menú semanal" />
-      <DaySelector selectedDay={day} onDaySelect={setDay} />
+      <DaySelector selectedDay={day} onDaySelect={handleDaySelect} />
       <MenuSection
         mealType="lunch"
         meal={weeklyMenu[day].lunch}

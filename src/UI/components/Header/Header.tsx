@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BurguerMenu from "../BurguerMenu/BurgerMenu";
+import { LogOut } from "lucide-react";
 
 interface HeaderProps {
   title: string;
@@ -8,9 +9,8 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <header className="fixed top-0 w-full max-w-[500px] mx-auto z-60 bg-primary p-4 uppercase h-16 flex items-center justify-between">
-      <div className="flex-1 flex justify-start">
-        <BurguerMenu />
-      </div>
+      <BurguerMenu />
+
       <Link
         to="/"
         aria-label="Página principal"
@@ -20,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
           {title}
         </h1>
       </Link>
+      <LogOut width={28} height={28} />
     </header>
   );
 };

@@ -5,11 +5,13 @@ import App from "../UI/components/App/App";
 import MenuPage from "../menu/weeklyMenu/pages/MenuPage/MenuPage";
 import ShoppingListPage from "../menu/shoppingList/pages/ShoppingListPage/ShoppingListPage";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
+import AuthPage from "@/auth/pages/AuthPage";
 
 const AppRouter: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="/auth" element={<AuthPage />} />
         <Route index element={<HomePage />} />
         <Route path="menu-semanal" element={<MenuPage />} />
         <Route path="lista-compra" element={<ShoppingListPage />} />

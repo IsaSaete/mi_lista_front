@@ -5,29 +5,22 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onTabChange }) => {
+  const classLabels = "flex gap-2 items-center font-semibold text-lg";
+  const classInputs =
+    "border-2 border-secondary-hover rounded-2xl text-foreground py-1 px-4 font-semibold";
+
   return (
     <form className="mt-10 rounded-md">
       <div className="flex flex-col gap-4">
         <div className="flex-1 flex flex-col gap-1 ">
-          <label
-            htmlFor="email"
-            className="flex gap-3 items-center font-semibold text-2xl"
-          >
+          <label htmlFor="email" className={classLabels}>
             <Mail />
             Email
           </label>
-          <input
-            required
-            id="email"
-            type="text"
-            className="border-2 border-secondary-hover rounded-2xl text-foreground py-2 px-4 font-semibold"
-          />
+          <input required id="email" type="text" className={classInputs} />
         </div>
         <div className="flex-1 flex flex-col gap-1 ">
-          <label
-            htmlFor="password"
-            className="flex gap-3 items-center font-semibold text-2xl"
-          >
+          <label htmlFor="password" className={classLabels}>
             <LockKeyhole />
             Contraseña
           </label>
@@ -35,7 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onTabChange }) => {
             required
             id="password"
             type="password"
-            className="border-2 border-secondary-hover rounded-2xl text-foreground py-2 px-4 font-semibold"
+            className={classInputs}
           />
         </div>
         <div className="text-center">

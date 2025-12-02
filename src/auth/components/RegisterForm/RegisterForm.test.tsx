@@ -41,14 +41,24 @@ describe("Given the RegisterForm component", () => {
       expect(emailTextBox).toBeInTheDocument();
     });
 
-    test("Then it should show a 'Contraseña' tet box", () => {
-      const expectedText = /contraseña/i;
+    test("Then it should show a 'Contraseña' text box", () => {
+      const expectedText = "Contraseña";
 
       render(<RegisterForm onTabChange={action} />);
 
-      const nameTextBox = screen.getByLabelText(expectedText);
+      const passwordTextBox = screen.getByLabelText(expectedText);
 
-      expect(nameTextBox).toBeInTheDocument();
+      expect(passwordTextBox).toBeInTheDocument();
+    });
+
+    test("Then it should show a 'Repetir contraseña' text box", () => {
+      const expectedText = "Repetir contraseña";
+
+      render(<RegisterForm onTabChange={action} />);
+
+      const repeatPasswordTextBox = screen.getByLabelText(expectedText);
+
+      expect(repeatPasswordTextBox).toBeInTheDocument();
     });
 
     test("Then it should show a 'Regístrate' button text", () => {

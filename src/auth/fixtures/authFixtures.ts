@@ -3,12 +3,11 @@ import type { AuthResponse, RegisterCredentials } from "../types";
 export const franciscaData: RegisterCredentials = {
   name: "Francisca",
   email: "francisca@francisca.com",
-  password: "encrypted",
+  password: import.meta.env.TEST_PASSWORD,
 };
 
 export const francsicaDataUser: AuthResponse = {
-  token:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTMwMjEwZjdkMjU3MzcwY2VkZjk2ZjMiLCJpYXQiOjE3NjQ3NjE4NzEsImV4cCI6MTc2NzM1Mzg3MX0.w1icp0TWGyhng25I6_M0K-Hrr5lW32baajqN_1P5QTo",
+  token: "mock-jwt-token-for-testing-purposes-only",
   user: {
     email: "francisca@francisca.com",
     name: "Francisca",
@@ -19,5 +18,5 @@ export const francsicaDataUser: AuthResponse = {
 export const encarnitaData: RegisterCredentials = {
   name: "Encarnita",
   email: "encarnita@encarnita",
-  password: "encrypted",
+  password: import.meta.env.TEST_PASSWORD,
 };

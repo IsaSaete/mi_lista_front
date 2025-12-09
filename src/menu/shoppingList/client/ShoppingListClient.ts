@@ -13,7 +13,13 @@ class ShoppingListClient implements ShoppingListClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
 
   public getShoppingList = async (): Promise<Ingredient[]> => {
-    const response = await fetch(`${this.apiUrl}/shopping-list`);
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${this.apiUrl}/shopping-list`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error fetching shopping list");
@@ -33,14 +39,20 @@ class ShoppingListClient implements ShoppingListClientStructure {
   public addIngredient = async (
     ingredientName: IngredientSendFormData,
   ): Promise<Ingredient> => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${this.apiUrl}/shopping-list`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({ name: ingredientName.name }),
     });
+
     if (!response.ok) {
       throw new Error("Error adding new ingredient");
     }
+
     const { ingredient } = (await response.json()) as ResponseIngredientDto;
 
     const newIngredient = mapIngredientDtoToIngredient(ingredient);
@@ -51,11 +63,15 @@ class ShoppingListClient implements ShoppingListClientStructure {
   public togglePurchasedStatus = async (
     ingredientId: string,
   ): Promise<Ingredient> => {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `${this.apiUrl}/shopping-list/ingredients/${ingredientId}`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
 
@@ -75,11 +91,15 @@ class ShoppingListClient implements ShoppingListClientStructure {
   public deleteIngredient = async (
     ingredientId: string,
   ): Promise<Ingredient> => {
+    const token = localStorage.getItem("token");
     const response = await fetch(
       `${this.apiUrl}/shopping-list/ingredients/${ingredientId}`,
       {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       },
     );
 

@@ -5,7 +5,13 @@ class WeeklyMenuClient implements WeeklyMenuClientStructure {
   private readonly apiUrl = import.meta.env.VITE_API_URL;
 
   public getWeeklyMenu = async (): Promise<WeeklyMenu> => {
-    const response = await fetch(`${this.apiUrl}/weekly-menu`);
+    const token = localStorage.getItem("token");
+    const response = await fetch(`${this.apiUrl}/weekly-menu`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
     if (!response.ok) {
       throw new Error("Error fetching weekly menu data");
@@ -19,9 +25,13 @@ class WeeklyMenuClient implements WeeklyMenuClientStructure {
   public updateMeal = async (
     newMeal: UpdateMeal,
   ): Promise<UpdateMealResponse> => {
+    const token = localStorage.getItem("token");
     const response = await fetch(`${this.apiUrl}/weekly-menu`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify(newMeal),
     });
 

@@ -1,15 +1,27 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
+import { Provider } from "react-redux";
+import store from "@/store/store";
 import RegisterForm from "./RegisterForm";
 
 describe("Given the RegisterForm component", () => {
   const action = vitest.fn();
 
+  beforeEach(() => {
+    action.mockClear();
+  });
+
   describe("When it renders", () => {
     test("Then it should show a 'Nombre' text box", () => {
       const expectedText = /nombre/i;
 
-      render(<RegisterForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <RegisterForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const nameTextBox = screen.getByLabelText(expectedText);
 
@@ -21,7 +33,12 @@ describe("Given the RegisterForm component", () => {
         const expectedText = /nombre/i;
         const userName = "Francisca";
 
-        render(<RegisterForm onTabChange={action} />);
+        render(
+          <Provider store={store}>
+            <RegisterForm onTabChange={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
 
         const nameTextBox = screen.getByLabelText(expectedText);
 
@@ -34,7 +51,12 @@ describe("Given the RegisterForm component", () => {
     test("Then it should show a 'Email' text box", () => {
       const expectedText = /email/i;
 
-      render(<RegisterForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <RegisterForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const emailTextBox = screen.getByLabelText(expectedText);
 
@@ -44,7 +66,12 @@ describe("Given the RegisterForm component", () => {
     test("Then it should show a 'Contraseña' text box", () => {
       const expectedText = "Contraseña";
 
-      render(<RegisterForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <RegisterForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const passwordTextBox = screen.getByLabelText(expectedText);
 
@@ -54,7 +81,12 @@ describe("Given the RegisterForm component", () => {
     test("Then it should show a 'Repetir contraseña' text box", () => {
       const expectedText = "Repetir contraseña";
 
-      render(<RegisterForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <RegisterForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const repeatPasswordTextBox = screen.getByLabelText(expectedText);
 
@@ -64,11 +96,77 @@ describe("Given the RegisterForm component", () => {
     test("Then it should show a 'Regístrate' button text", () => {
       const expectedText = /regístrate/i;
 
-      render(<RegisterForm onTabChange={action} />);
-
+      render(
+        <Provider store={store}>
+          <RegisterForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
       const buttonText = screen.getByRole("button", { name: expectedText });
 
       expect(buttonText).toBeInTheDocument();
+    });
+
+    describe("And the user submits an empty form", () => {
+      test("Then it should show validation error messages", async () => {
+        render(
+          <Provider store={store}>
+            <RegisterForm onTabChange={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
+
+        const submitButton = screen.getByRole("button", {
+          name: /regístrate/i,
+        });
+
+        await userEvent.click(submitButton);
+
+        const validationNameMessage = screen.getByText(
+          "El nombre es obligatorio",
+        );
+        const validationEmailMessage = screen.getByText(
+          "El email es obligatorio",
+        );
+        const validationPasswordMessage = screen.getByText(
+          "Mínimo 6 caracteres",
+        );
+        const allFieldsCompletedMessage = screen.getByText(
+          "Completa correctamente todos los campos",
+        );
+
+        expect(allFieldsCompletedMessage).toBeInTheDocument();
+        expect(validationNameMessage).toBeInTheDocument();
+        expect(validationEmailMessage).toBeInTheDocument();
+        expect(validationPasswordMessage).toBeInTheDocument();
+      });
+    });
+
+    describe("And the user submit with invalid email", () => {
+      test("Then it should show 'El email no es válido' message", async () => {
+        render(
+          <Provider store={store}>
+            <RegisterForm onTabChange={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
+
+        const emailTextBox = screen.getByLabelText(/email/i);
+
+        await userEvent.type(emailTextBox, "francisca@test1");
+
+        const submitButton = screen.getByRole("button", {
+          name: /regístrate/i,
+        });
+
+        await userEvent.click(submitButton);
+
+        const validationEmailMessage = screen.getByText(
+          "El email no es válido",
+        );
+
+        expect(validationEmailMessage).toBeInTheDocument();
+      });
     });
   });
 });

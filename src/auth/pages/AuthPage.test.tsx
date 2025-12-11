@@ -1,6 +1,9 @@
+import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
-import AuthPage from "./AuthPage";
+import { MemoryRouter } from "react-router";
 import userEvent from "@testing-library/user-event";
+import AuthPage from "./AuthPage";
+import store from "@/store/store";
 
 describe("Given the AuthPage", () => {
   describe("When it renders", () => {
@@ -33,11 +36,16 @@ describe("Given the AuthPage", () => {
     });
 
     describe("And the user clicks on the 'Registrarse' tab", () => {
-      test("Then it should sho the register form", async () => {
+      test("Then it should show the register form", async () => {
         const expectedRegisterText = /registrarse/i;
         const expectedUserNameTextBox = /nombre/i;
 
-        render(<AuthPage />);
+        render(
+          <Provider store={store}>
+            <AuthPage />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
 
         const registerTab = screen.getByRole("tab", {
           name: expectedRegisterText,

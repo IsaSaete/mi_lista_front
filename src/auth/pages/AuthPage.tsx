@@ -15,13 +15,13 @@ const AuthPage: React.FC = () => {
           Mi menú
         </h1>
       </header>
-      <main className="p-4 ">
+      <main className="p-4 flex-grow">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full gap-1 grid-cols-2">
-            <TabsTrigger value="login" className="text-base">
+          <TabsList className="grid w-full gap-1 grid-cols-2 ">
+            <TabsTrigger value="login" className="text-base shadow-lg">
               Iniciar sesión
             </TabsTrigger>
-            <TabsTrigger value="register" className="text-base">
+            <TabsTrigger value="register" className="text-base shadow-lg">
               Registrarse
             </TabsTrigger>
           </TabsList>

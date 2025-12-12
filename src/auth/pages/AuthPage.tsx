@@ -4,6 +4,7 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import LoginForm from "../components/LoginForm/LoginForm";
 import RegisterForm from "../components/RegisterForm/RegisterForm";
 import Footer from "@/UI/components/Footer/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const AuthPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState("login");
@@ -36,6 +37,7 @@ const AuthPage: React.FC = () => {
         </Tabs>
       </main>
       <Footer />
+      <Toaster />
     </div>
   );
 };

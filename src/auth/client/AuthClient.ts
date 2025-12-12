@@ -17,9 +17,7 @@ class AuthClient implements AuthClientStructure {
       if (response.status === 409) {
         throw new Error("El usuario ya existe");
       }
-      if (response.status === 400) {
-        throw new Error("Datos inválidos");
-      }
+
       throw new Error("Error al registrar usuario");
     }
 

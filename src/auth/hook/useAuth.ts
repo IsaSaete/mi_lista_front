@@ -32,12 +32,17 @@ const useAuth = () => {
 
         return registeredUserData;
       } catch (error) {
-        dispatch(registerUserFailureCreator(error));
+        const errorMessage =
+          error instanceof Error ? error.message : "Error en el registro";
+
+        dispatch(registerUserFailureCreator(errorMessage));
+
         throw error;
       }
     },
     [authClient, dispatch],
   );
+
   return { registerUser, isLoading, error, token, userInfo };
 };
 

@@ -22,7 +22,7 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.userInfo = action.payload.user;
     },
-    registerUserFailure: (state, action) => {
+    registerUserFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -38,7 +38,7 @@ export const {
   registerUserStart: registerUserStartCreator,
   registerUserSuccess: registerUserCreator,
   registerUserFailure: registerUserFailureCreator,
-  logout,
+  logout: logoutCreator,
 } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "@/auth/hook/useAuth";
 import type { FormCredentials, RegisterCredentials } from "@/auth/types";
+import showToast from "@/UI/toast/showToast";
 
 interface RegisterFormProps {
   onTabChange: (tab: "login" | "register") => void;
@@ -76,13 +77,24 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onTabChange }) => {
 
       await registerUser(userCredentials);
 
-      navigate("/");
-    } catch {
-      setUserFormData((previousData) => ({
-        ...previousData,
-        password: "",
-        repeatPassword: "",
-      }));
+      showToast(
+        "success",
+        "Usuario registrado con éxito",
+        `¡Bienvenida/o ${userFormData.name}`,
+      );
+
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
+    } catch (error: unknown) {
+      if (error instanceof Error && error.message === "El usuario ya existe") {
+        showToast("error", "Usuario ya registrado", "Por favor, inicia sesión");
+
+        onTabChange("login");
+      } else {
+        showToast("error", "Error en el registro", "Inténtalo de nuevo");
+      }
+      setUserFormData(newUserData);
     }
   };
 

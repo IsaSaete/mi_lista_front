@@ -54,4 +54,44 @@ describe("Given the registerUser function", () => {
       expect(token).toBe(francsicaDataUser.token);
     });
   });
+
+  describe("When it's called with Francisca credentials and she is yet registered", () => {
+    test("Then it should show an erro in the register", async () => {
+      const apiUrl = import.meta.env.VITE_API_URL;
+
+      const initialState: AuthState = {
+        error: null,
+        isLoading: false,
+        userInfo: null,
+        token: null,
+      };
+
+      const store = setupStore({ auth: initialState });
+
+      const wrapper = ({ children }: { children: React.ReactNode }) => (
+        <MemoryRouter>
+          <Provider store={store}>{children}</Provider>
+        </MemoryRouter>
+      );
+
+      server.use(
+        http.post(`${apiUrl}/auth/register`, () => {
+          return HttpResponse.json(
+            { error: "User already exists" },
+            { status: 409 },
+          );
+        }),
+      );
+
+      const { result } = renderHook(() => useAuth(), { wrapper: wrapper });
+
+      await act(async () => {
+        await result.current.registerUser(franciscaData).catch(() => {});
+      });
+
+      const error = result.current.error;
+
+      expect(error).toBe("El usuario ya existe");
+    });
+  });
 });

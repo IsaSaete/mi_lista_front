@@ -4,6 +4,9 @@ import { MemoryRouter } from "react-router";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import RegisterForm from "./RegisterForm";
+import showToast from "@/UI/toast/showToast";
+
+vi.mock("@/UI/toast/showToast");
 
 describe("Given the RegisterForm component", () => {
   const action = vitest.fn();
@@ -166,6 +169,42 @@ describe("Given the RegisterForm component", () => {
         );
 
         expect(validationEmailMessage).toBeInTheDocument();
+      });
+    });
+
+    describe("And the user fill fill all fields of the form", () => {
+      test("Then it should show a success message", async () => {
+        const mockShowToast = vi.mocked(showToast);
+
+        render(
+          <Provider store={store}>
+            <RegisterForm onTabChange={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
+
+        const nameTextBox = screen.getByLabelText(/nombre/i);
+        const emailTextBox = screen.getByLabelText(/email/i);
+        const passwordTextBox = screen.getByLabelText("Contraseña");
+        const repeatPasswordTextBox =
+          screen.getByLabelText("Repetir contraseña");
+
+        await userEvent.type(nameTextBox, "Francisca");
+        await userEvent.type(emailTextBox, "francisa@francisca.com");
+        await userEvent.type(passwordTextBox, "Francisca");
+        await userEvent.type(repeatPasswordTextBox, "Francisca");
+
+        const submitButton = screen.getByRole("button", {
+          name: /regístrate/i,
+        });
+
+        await userEvent.click(submitButton);
+
+        expect(mockShowToast).toHaveBeenCalledWith(
+          "success",
+          "Usuario registrado con éxito",
+          "¡Bienvenida/o Francisca",
+        );
       });
     });
   });

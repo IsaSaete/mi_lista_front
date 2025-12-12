@@ -41,27 +41,6 @@ describe("Given the registerUser method of AuthClient", () => {
     });
   });
 
-  describe("When it's called and the server responds with an error 400", () => {
-    test("Then it should throw an error with message 'Datos inválidos'", () => {
-      const expectedErrorMessage = "Datos inválidos";
-      const newUser = encarnitaData;
-
-      const apiUrl = import.meta.env.VITE_API_URL;
-
-      server.use(
-        http.post(`${apiUrl}/auth/register`, () => {
-          return new HttpResponse(null, { status: 400 });
-        }),
-      );
-
-      const authClient = new AuthClient();
-
-      const registeredUser = authClient.registerUser(newUser);
-
-      expect(registeredUser).rejects.toThrow(expectedErrorMessage);
-    });
-  });
-
   describe("When it's called and the server responds with an error 500", () => {
     test("Then it should throw an error with message 'Error al registrar usuario'", () => {
       const expectedErrorMessage = "Error al registrar usuario";

@@ -56,7 +56,7 @@ describe("Given the registerUser function", () => {
   });
 
   describe("When it's called with Francisca credentials and she is yet registered", () => {
-    test("Then it should show an erro in the register", async () => {
+    test("Then it should show an error in the register", async () => {
       const apiUrl = import.meta.env.VITE_API_URL;
 
       const initialState: AuthState = {

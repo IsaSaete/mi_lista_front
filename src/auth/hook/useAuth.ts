@@ -2,8 +2,15 @@ import { useAppSelector } from "@/store/hooks";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import AuthClient from "../client/AuthClient";
-import type { AuthResponse, RegisterCredentials } from "../types";
+import type {
+  AuthResponse,
+  LoginCredentials,
+  RegisterCredentials,
+} from "../types";
 import {
+  loginStartCreator,
+  loginUserCreator,
+  loginUserFailureCreator,
   registerUserCreator,
   registerUserFailureCreator,
   registerUserStartCreator,
@@ -43,7 +50,39 @@ const useAuth = () => {
     [authClient, dispatch],
   );
 
-  return { registerUser, isLoading, error, token, userInfo };
+  const loginUser = useCallback(
+    async (credentials: LoginCredentials): Promise<AuthResponse> => {
+      dispatch(loginStartCreator());
+
+      try {
+        const loginUser = await authClient.loginUser(credentials);
+
+        dispatch(loginUserCreator(loginUser));
+
+        localStorage.setItem("token", loginUser.token);
+        localStorage.setItem("user", JSON.stringify(loginUser.user));
+
+        return loginUser;
+      } catch (error) {
+        const errorLoginMessage =
+          error instanceof Error ? error.message : "Error al logear";
+
+        dispatch(loginUserFailureCreator(errorLoginMessage));
+
+        throw error;
+      }
+    },
+    [authClient, dispatch],
+  );
+
+  return {
+    registerUser,
+    isLoading,
+    error,
+    token,
+    userInfo,
+    loginUser,
+  };
 };
 
 export default useAuth;

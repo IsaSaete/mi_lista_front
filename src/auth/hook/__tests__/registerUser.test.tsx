@@ -77,7 +77,7 @@ describe("Given the registerUser function", () => {
       server.use(
         http.post(`${apiUrl}/auth/register`, () => {
           return HttpResponse.json(
-            { error: "User already exists" },
+            { error: "El usuario ya existe" },
             { status: 409 },
           );
         }),

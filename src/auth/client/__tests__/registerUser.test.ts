@@ -1,3 +1,4 @@
+import { http, HttpResponse } from "msw";
 import {
   encarnitaData,
   franciscaData,
@@ -5,11 +6,10 @@ import {
 } from "@/auth/fixtures/authFixtures";
 import AuthClient from "../AuthClient";
 import { server } from "@/setupTests";
-import { http, HttpResponse } from "msw";
 
 describe("Given the registerUser method of AuthClient", () => {
   describe("When it's called with the credentials of the user Francisca", () => {
-    test("Then it should return the data for the user Francisca ant her token", async () => {
+    test("Then it should return the data for the user Francisca and her token", async () => {
       const newUser = franciscaData;
 
       const authClient = new AuthClient();

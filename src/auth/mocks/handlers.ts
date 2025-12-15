@@ -12,4 +12,7 @@ export const authHandlers = [
   http.post(`${apiUrl}/auth/register`, () => {
     return HttpResponse.json<AuthResponse>(francsicaDataUser);
   }),
+  http.post(`${apiUrl}/auth/login`, () => {
+    return HttpResponse.json<AuthResponse>(francsicaDataUser);
+  }),
 ];

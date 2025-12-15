@@ -1,4 +1,8 @@
-import type { AuthResponse, RegisterCredentials } from "../types";
+import type {
+  AuthResponse,
+  LoginCredentials,
+  RegisterCredentials,
+} from "../types";
 import type { AuthClientStructure } from "./types";
 
 class AuthClient implements AuthClientStructure {
@@ -24,6 +28,28 @@ class AuthClient implements AuthClientStructure {
     const registeredUser = (await response.json()) as AuthResponse;
 
     return registeredUser;
+  };
+
+  public loginUser = async (
+    credentials: LoginCredentials,
+  ): Promise<AuthResponse> => {
+    const response = await fetch(`${this.apiUrl}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        throw new Error("Credenciales inválidas");
+      }
+
+      throw new Error("Error al verificar usuario");
+    }
+
+    const loginUser = (await response.json()) as AuthResponse;
+
+    return loginUser;
   };
 }
 

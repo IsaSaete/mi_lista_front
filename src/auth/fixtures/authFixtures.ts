@@ -1,4 +1,8 @@
-import type { AuthResponse, RegisterCredentials } from "../types";
+import type {
+  AuthResponse,
+  LoginCredentials,
+  RegisterCredentials,
+} from "../types";
 
 export const franciscaData: RegisterCredentials = {
   name: "Francisca",
@@ -18,5 +22,10 @@ export const francsicaDataUser: AuthResponse = {
 export const encarnitaData: RegisterCredentials = {
   name: "Encarnita",
   email: "encarnita@encarnita",
+  password: import.meta.env.TEST_PASSWORD,
+};
+
+export const franciscaLogin: LoginCredentials = {
+  email: "francisca@francisca.com",
   password: import.meta.env.TEST_PASSWORD,
 };

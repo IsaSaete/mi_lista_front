@@ -18,3 +18,8 @@ export interface RegisterCredentials {
 export interface FormCredentials extends RegisterCredentials {
   repeatPassword: string;
 }
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}

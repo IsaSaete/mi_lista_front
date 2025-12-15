@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import AuthPage from "./AuthPage";
 import store from "@/store/store";
@@ -11,7 +11,12 @@ describe("Given the AuthPage", () => {
       const expectedRegisterText = /registrarse/i;
       const expectedLoginText = /iniciar sesión/i;
 
-      render(<AuthPage />);
+      render(
+        <Provider store={store}>
+          <AuthPage />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const registerTab = screen.getByRole("tab", {
         name: expectedRegisterText,
@@ -26,7 +31,12 @@ describe("Given the AuthPage", () => {
       const expectedPasswordTextBox = /contraseña/i;
       const expectedEmailTextBox = /email/i;
 
-      render(<AuthPage />);
+      render(
+        <Provider store={store}>
+          <AuthPage />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const passwordTextBox = screen.getByLabelText(expectedPasswordTextBox);
       const emailTextBox = screen.getByLabelText(expectedEmailTextBox);

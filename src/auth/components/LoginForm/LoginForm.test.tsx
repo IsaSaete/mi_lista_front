@@ -1,6 +1,9 @@
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import LoginForm from "./LoginForm";
+import store from "@/store/store";
 
 describe("Given the LoginForm component", () => {
   const action = vitest.fn();
@@ -9,7 +12,12 @@ describe("Given the LoginForm component", () => {
     test("Then it should show a 'Email' text box", () => {
       const expectedText = /email/i;
 
-      render(<LoginForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <LoginForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const emailTextBox = screen.getByLabelText(expectedText);
 
@@ -21,7 +29,12 @@ describe("Given the LoginForm component", () => {
         const expectedText = /email/i;
         const user1Email = "user1@gmail.com";
 
-        render(<LoginForm onTabChange={action} />);
+        render(
+          <Provider store={store}>
+            <LoginForm onTabChange={action} />
+          </Provider>,
+          { wrapper: MemoryRouter },
+        );
 
         const emailTextBox = screen.getByLabelText(expectedText);
 
@@ -34,7 +47,12 @@ describe("Given the LoginForm component", () => {
     test("Then it should show a 'Contraseña' text box", () => {
       const expectedText = /contraseña/i;
 
-      render(<LoginForm onTabChange={action} />);
+      render(
+        <Provider store={store}>
+          <LoginForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
 
       const passwordTextBox = screen.getByLabelText(expectedText);
 
@@ -44,8 +62,12 @@ describe("Given the LoginForm component", () => {
     test("Then it should show a 'Inicia sesión' button text", () => {
       const expectedText = /iniciar sesión/i;
 
-      render(<LoginForm onTabChange={action} />);
-
+      render(
+        <Provider store={store}>
+          <LoginForm onTabChange={action} />
+        </Provider>,
+        { wrapper: MemoryRouter },
+      );
       const buttonText = screen.getByRole("button", { name: expectedText });
 
       expect(buttonText).toBeInTheDocument();

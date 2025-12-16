@@ -1,4 +1,4 @@
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { http, HttpResponse } from "msw";
 import { act, renderHook } from "@testing-library/react";

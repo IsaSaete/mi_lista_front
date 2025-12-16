@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { http, HttpResponse } from "msw";
 import { Provider } from "react-redux";
 import {
@@ -10,7 +11,6 @@ import type { AuthState } from "@/auth/slice/types";
 import type { AuthResponse } from "@/auth/types";
 import { server } from "@/setupTests";
 import setupStore from "@/store/setupStore";
-import { MemoryRouter } from "react-router";
 import useAuth from "../useAuth";
 
 describe("Given the loginUser function", () => {

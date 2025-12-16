@@ -2,6 +2,7 @@ import { useAppSelector } from "@/store/hooks";
 import { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import AuthClient from "../client/AuthClient";
+import { useNavigate } from "react-router-dom";
 import type {
   AuthResponse,
   LoginCredentials,
@@ -11,6 +12,7 @@ import {
   loginStartCreator,
   loginUserCreator,
   loginUserFailureCreator,
+  logoutCreator,
   registerUserCreator,
   registerUserFailureCreator,
   registerUserStartCreator,
@@ -18,6 +20,7 @@ import {
 
 const useAuth = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { error, isLoading, token, userInfo } = useAppSelector(
     (state) => state.auth,
@@ -75,6 +78,15 @@ const useAuth = () => {
     [authClient, dispatch],
   );
 
+  const logoutUser = async (): Promise<void> => {
+    dispatch(logoutCreator());
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    navigate("/auth");
+  };
+
   return {
     registerUser,
     isLoading,
@@ -82,6 +94,7 @@ const useAuth = () => {
     token,
     userInfo,
     loginUser,
+    logoutUser,
   };
 };
 

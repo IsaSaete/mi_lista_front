@@ -93,8 +93,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ onTabChange }) => {
             onChange={changeUserData}
           />
           {showErrors && !userLoginData.email.trim() && (
-            <p className="text-error text-sm ml-1">El email es obligatorio</p>
+            <p
+              className="text-error text-sm ml-1"
+              role="alert"
+              aria-live="assertive"
+            >
+              El email es obligatorio.
+            </p>
           )}
+          {showErrors &&
+            userLoginData.email.trim() &&
+            !isValidFormatEmail(userLoginData.email) && (
+              <p
+                className="text-error text-sm ml-1"
+                role="alert"
+                aria-live="assertive"
+              >
+                El email no es válido.
+              </p>
+            )}
         </div>
         <div className="flex-1 flex flex-col gap-1 ">
           <label htmlFor="password" className={classLabels}>
@@ -109,9 +126,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onTabChange }) => {
             value={userLoginData.password}
             onChange={changeUserData}
           />
-          {showErrors && !userLoginData.password && (
-            <p className="text-error text-sm ml-1">
-              La contraseña es obligatorio
+          {showErrors && userLoginData.password.length < 6 && (
+            <p
+              className="text-error text-sm ml-1"
+              role="alert"
+              aria-live="assertive"
+            >
+              La contraseña es obligatoria, mínimo 6 caracteres.
             </p>
           )}
         </div>

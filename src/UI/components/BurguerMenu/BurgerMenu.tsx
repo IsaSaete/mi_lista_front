@@ -18,13 +18,13 @@ const BurguerMenu: React.FC = () => {
       <button
         aria-label="Abrir menú"
         onClick={handleOpen}
-        className="focus:outline-none focus:ring-3 focus:ring-secondary-hover"
+        className="focus:outline-none focus:ring-2 focus:ring-secondary-hover focus:rounded-lg"
       >
         <Menu width={28} height={28} className="scale-125" />
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 top-16 max-w-[500px] mx-auto ">
+        <div className="fixed inset-0 top-16 max-w-[500px] mx-auto">
           <button
             className="absolute inset-0 bg-black/70 w-full max-w-[500px] mx-auto"
             onClick={closeBurgerMenu}

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "@/store/store";
 import RegisterForm from "./RegisterForm";
@@ -9,11 +9,10 @@ import showToast from "@/UI/toast/showToast";
 vi.mock("@/UI/toast/showToast");
 
 describe("Given the RegisterForm component", () => {
-  const action = vitest.fn();
-
   beforeEach(() => {
     action.mockClear();
   });
+  const action = vitest.fn();
 
   describe("When it renders", () => {
     test("Then it should show a 'Nombre' text box", () => {

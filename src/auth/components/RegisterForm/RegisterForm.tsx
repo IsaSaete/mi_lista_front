@@ -1,6 +1,6 @@
 import { LockKeyhole, Mail, UserRound } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useAuth from "@/auth/hook/useAuth";
 import type { FormCredentials, RegisterCredentials } from "@/auth/types";
 import showToast from "@/UI/toast/showToast";

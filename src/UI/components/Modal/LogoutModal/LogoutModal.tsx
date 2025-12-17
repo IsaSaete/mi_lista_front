@@ -30,7 +30,7 @@ const LogoutModal: React.FC<LogoutModalProps> = ({
           className="absolute inset-0 bg-black/70"
           onClick={handleClose}
         />
-        <div className="relative bg-background rounded-2xl p-6 max-w-md w-full">
+        <div className="relative bg-background rounded-2xl py-6 px-8">
           <h2 className="text-2xl font-semibold text-foreground mb-5 text-center">
             {title}
           </h2>

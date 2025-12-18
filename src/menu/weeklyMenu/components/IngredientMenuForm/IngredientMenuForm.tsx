@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type {
   DayOfWeek,
   IngredientSendFormData,
@@ -5,14 +6,13 @@ import type {
   MealType,
   WeeklyMenu,
 } from "@/menu/types";
-import { useState } from "react";
 import { dayLabels, mealTypeLabels } from "../../mapper/mappersMenu";
 
 interface IngredientMenuFormProps {
   selectedDay: DayOfWeek;
   selectedMealType: MealType;
   weeklyMenu: WeeklyMenu;
-  onclose: () => void;
+  onClose: () => void;
   addIngredient: (nameIngredient: IngredientSendFormData) => void;
 }
 
@@ -20,7 +20,7 @@ const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
   selectedDay,
   selectedMealType,
   weeklyMenu,
-  onclose,
+  onClose: onclose,
   addIngredient,
 }) => {
   const initialMealData = weeklyMenu[selectedDay]?.[selectedMealType] || {};

@@ -8,8 +8,8 @@ import FormModal from "@/UI/components/Modal/FormModal";
 import MenuForm from "../../components/MenuForm/MenuForm";
 import { dayLabels, mealTypeLabels } from "../../mapper/mappersMenu";
 import { useSearchParams } from "react-router";
-import IngredientMenuForm from "../../components/IngredientMenuForm/IngredientMEnuForm";
 import useShoppingList from "@/menu/shoppingList/hooks/useShoppingList";
+import IngredientMenuForm from "../../components/IngredientMenuForm/IngredientMenuForm";
 
 type ModalType = "none" | "editMeal" | "addIngredients";
 
@@ -88,7 +88,7 @@ const MenuPage: React.FC = () => {
             selectedDay={selectedMeal.day}
             selectedMealType={selectedMeal.mealType}
             weeklyMenu={weeklyMenu}
-            onclose={handleCloseModal}
+            onClose={handleCloseModal}
             addIngredient={addIngredient}
           />
         </FormModal>

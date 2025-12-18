@@ -1,10 +1,10 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import PageTitle from "@/menu/components/PageTitle/PageTitle";
 import ShoppingList from "@/menu/shoppingList/components/ShoppingList/ShoppingList";
 import IngredientForm from "../../components/IngredientForm/IngredientForm";
 import useShoppingList from "../../hooks/useShoppingList";
 import Loader from "@/UI/components/Loader/Loader";
-import { useSelector } from "react-redux";
 import { selectSeparatedIngredients } from "../../slice/shoppingListSelector";
 
 const ShoppingListPage = () => {

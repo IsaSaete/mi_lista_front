@@ -7,12 +7,14 @@ interface MenuSectionProps {
   mealType: MealType;
   meal?: Meal;
   onEdit: () => void;
+  addIngredients: () => void;
 }
 
 const MenuSection: React.FC<MenuSectionProps> = ({
   mealType,
   meal,
   onEdit,
+  addIngredients,
 }) => {
   const { isLoading } = useWeeklyMenu();
 
@@ -58,7 +60,10 @@ const MenuSection: React.FC<MenuSectionProps> = ({
       )}
 
       <div className="flex w-full justify-between">
-        <button className="bg-primary hover:bg-secondary text-foreground font-semibold px-6 py-2 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-background">
+        <button
+          onClick={addIngredients}
+          className="bg-primary hover:bg-secondary text-foreground font-semibold px-6 py-2 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-background"
+        >
           Ingredientes
         </button>
         <button

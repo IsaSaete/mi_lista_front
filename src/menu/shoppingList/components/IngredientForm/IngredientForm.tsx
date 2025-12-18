@@ -34,7 +34,7 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" fixed bottom-0  w-full max-w-[500px] left-1/2 -translate-x-1/2 z-1 bg-primary p-5"
+      className="fixed bottom-0 w-full max-w-[500px] left-1/2 -translate-x-1/2 z-1 bg-primary p-5"
     >
       <div className="container mx-auto max-w-md flex items-center gap-3">
         <label htmlFor="ingredientName" className="sr-only">

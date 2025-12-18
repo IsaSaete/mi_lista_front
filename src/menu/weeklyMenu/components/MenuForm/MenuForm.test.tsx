@@ -5,7 +5,7 @@ import store from "@/store/store";
 import MenuForm from "./MenuForm";
 import { weeklyMenuData } from "../../fixtures/recipes";
 
-describe("Given the MenuForm componente", () => {
+describe("Given the MenuForm component", () => {
   const action = vitest.fn();
 
   beforeEach(() => {

@@ -8,14 +8,19 @@ import FormModal from "@/UI/components/Modal/FormModal";
 import MenuForm from "../../components/MenuForm/MenuForm";
 import { dayLabels, mealTypeLabels } from "../../mapper/mappersMenu";
 import { useSearchParams } from "react-router";
+import useShoppingList from "@/menu/shoppingList/hooks/useShoppingList";
+import IngredientMenuForm from "../../components/IngredientMenuForm/IngredientMenuForm";
+
+type ModalType = "none" | "editMeal" | "addIngredients";
 
 const MenuPage: React.FC = () => {
+  const { addIngredient } = useShoppingList();
   const { weeklyMenu, loadWeeklyMenu } = useWeeklyMenu();
   const [selectedMeal, setSelectedMeal] = useState<EditingMeal>({
     day: "L",
     mealType: "lunch",
   });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModal, setActiveModal] = useState<ModalType>("none");
   const [searchParams, setSearchParams] = useSearchParams();
   const day = (searchParams.get("day") as DayOfWeek) || "L";
 
@@ -23,42 +28,18 @@ const MenuPage: React.FC = () => {
     setSearchParams({ day: selectedDay });
   };
 
-  const handleMealSelection = (day: DayOfWeek, mealType: MealType) => {
+  const handleEditMeal = (day: DayOfWeek, mealType: MealType) => {
     setSelectedMeal({ day, mealType });
+    setActiveModal("editMeal");
+  };
 
-    setIsModalOpen(true);
+  const handleAddIngredients = (day: DayOfWeek, mealType: MealType) => {
+    setSelectedMeal({ day, mealType });
+    setActiveModal("addIngredients");
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const renderFormModal = () => {
-    if (!selectedMeal) {
-      return;
-    }
-
-    return (
-      <FormModal
-        key={
-          selectedMeal
-            ? `${selectedMeal.day}-${selectedMeal.mealType}`
-            : "closed"
-        }
-        title="Formulario para editar menú"
-        description={`Editar menù de: ${mealTypeLabels[selectedMeal.mealType]} - ${dayLabels[selectedMeal.day]}`}
-        isOpen={isModalOpen}
-      >
-        {selectedMeal && (
-          <MenuForm
-            selectedDay={selectedMeal.day}
-            selectedMealType={selectedMeal.mealType}
-            onClose={handleCloseModal}
-            weeklyMenu={weeklyMenu}
-          />
-        )}
-      </FormModal>
-    );
+    setActiveModal("none");
   };
 
   useEffect(() => {
@@ -72,14 +53,46 @@ const MenuPage: React.FC = () => {
       <MenuSection
         mealType="lunch"
         meal={weeklyMenu[day].lunch}
-        onEdit={() => handleMealSelection(day, "lunch")}
+        onEdit={() => handleEditMeal(day, "lunch")}
+        addIngredients={() => handleAddIngredients(day, "lunch")}
       />
       <MenuSection
         mealType="dinner"
         meal={weeklyMenu[day].dinner}
-        onEdit={() => handleMealSelection(day, "dinner")}
+        onEdit={() => handleEditMeal(day, "dinner")}
+        addIngredients={() => handleAddIngredients(day, "dinner")}
       />
-      {renderFormModal()}
+      {activeModal === "editMeal" && selectedMeal && (
+        <FormModal
+          key={`menu-${selectedMeal.day}-${selectedMeal.mealType}`}
+          title="Formulario para editar menú"
+          description={`Editar menú de: ${mealTypeLabels[selectedMeal.mealType]} - ${dayLabels[selectedMeal.day]}`}
+          isOpen={activeModal === "editMeal"}
+        >
+          <MenuForm
+            selectedDay={selectedMeal.day}
+            selectedMealType={selectedMeal.mealType}
+            onClose={handleCloseModal}
+            weeklyMenu={weeklyMenu}
+          />
+        </FormModal>
+      )}
+      {activeModal === "addIngredients" && selectedMeal && (
+        <FormModal
+          key={`ingredients-${selectedMeal.day}-${selectedMeal.mealType}`}
+          title="Añadir ingredientes"
+          description={`Añadir ingredientes para: ${mealTypeLabels[selectedMeal.mealType]} - ${dayLabels[selectedMeal.day]}`}
+          isOpen={activeModal === "addIngredients"}
+        >
+          <IngredientMenuForm
+            selectedDay={selectedMeal.day}
+            selectedMealType={selectedMeal.mealType}
+            weeklyMenu={weeklyMenu}
+            onClose={handleCloseModal}
+            addIngredient={addIngredient}
+          />
+        </FormModal>
+      )}
     </>
   );
 };

@@ -7,13 +7,22 @@ import store from "@/store/store";
 describe("Given the MenuSection component", () => {
   const action = vitest.fn();
 
+  beforeEach(() => {
+    action.mockClear();
+  });
+
   describe("When it renders with Wednesday`s lunch data", () => {
     test("Then it should show a 'comida' inside a heading", async () => {
       const wednesdayLunch = weeklyMenuData.X.lunch;
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="lunch" meal={wednesdayLunch} onEdit={action} />
+          <MenuSection
+            mealType="lunch"
+            meal={wednesdayLunch}
+            onEdit={action}
+            addIngredients={action}
+          />
         </Provider>,
       );
 
@@ -27,7 +36,12 @@ describe("Given the MenuSection component", () => {
 
       render(
         <Provider store={store}>
-          <MenuSection mealType="lunch" meal={wednesdayLunch} onEdit={action} />
+          <MenuSection
+            mealType="lunch"
+            meal={wednesdayLunch}
+            onEdit={action}
+            addIngredients={action}
+          />
         </Provider>,
       );
 

@@ -29,12 +29,7 @@ const weeklyMenuSlice = createSlice({
     updateMeal: (state, { payload: updateMeal }: PayloadAction<UpdateMeal>) => {
       const { day, mealData, mealType } = updateMeal;
 
-      return {
-        weeklyMenu: {
-          ...state.weeklyMenu,
-          [day]: { ...state.weeklyMenu[day], [mealType]: mealData },
-        },
-      };
+      state.weeklyMenu[day][mealType] = mealData;
     },
   },
 });

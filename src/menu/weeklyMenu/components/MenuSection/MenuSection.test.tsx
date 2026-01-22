@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
 import MenuSection from "./MenuSection";
 import { weeklyMenuData } from "../../fixtures/recipes";
-import { Provider } from "react-redux";
 import store from "@/store/store";
 
 describe("Given the MenuSection component", () => {

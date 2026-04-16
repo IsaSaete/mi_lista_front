@@ -26,7 +26,10 @@ export const shoppingListHandlers = [
 
   http.post(`${apiUrl}/shopping-list`, () => {
     return HttpResponse.json<{ ingredient: IngredientDto }>({
-      ingredient: albahacaDto,
+      ingredient: {
+        ...albahacaDto,
+        _id: "14fbf39d8c9d1e4dabc5f199",
+      },
     });
   }),
 

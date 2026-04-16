@@ -17,7 +17,12 @@ describe("Given the addIngredient methos of ShoppingListClient", () => {
 
       const addIngredient = mapIngredientDtoToIngredient(albahacaDto);
 
-      expect(newIngredient).toStrictEqual(addIngredient);
+      expect(newIngredient).toMatchObject({
+        name: addIngredient.name,
+        category: addIngredient.category,
+        isPurchased: addIngredient.isPurchased,
+        createdAt: addIngredient.createdAt,
+      });
     });
   });
 

@@ -3,6 +3,7 @@ import type {
   ResponseIngredientDto,
   ShoppingListClientStructure,
 } from "./types";
+import { DuplicateIngredientError } from "./duplicateIngredientError";
 import {
   mapIngredientDtoToIngredient,
   mapIngredientsDtotoIngredients,
@@ -48,6 +49,20 @@ class ShoppingListClient implements ShoppingListClientStructure {
       },
       body: JSON.stringify({ name: ingredientName.name }),
     });
+
+    if (response.status === 409) {
+      let message = "Este ingrediente ya está en la lista";
+      try {
+        const body = (await response.json()) as { error?: string };
+        if (body.error) {
+          message = body.error;
+        }
+      } catch {
+        // keep default message
+      }
+
+      throw new DuplicateIngredientError(message);
+    }
 
     if (!response.ok) {
       throw new Error("Error adding new ingredient");

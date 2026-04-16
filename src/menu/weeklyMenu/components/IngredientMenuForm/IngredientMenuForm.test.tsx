@@ -10,6 +10,7 @@ describe("Given the IngredientMenuForm component", () => {
 
   beforeEach(() => {
     action.mockClear();
+    action.mockImplementation(async () => "added");
   });
 
   describe("When it renders in Monday lunch", () => {
@@ -96,16 +97,27 @@ describe("Given the IngredientMenuForm component", () => {
       });
 
       describe("And the user clicks on 'Añadir' button", () => {
-        test("Then it should call the action", async () => {
+        const addIngredient = vitest.fn();
+        const onClose = vitest.fn();
+
+        beforeEach(() => {
+          addIngredient.mockReset();
+          onClose.mockReset();
+        });
+
+        test("Then it should call addIngredient and show confirmation message", async () => {
           const expectedLabel = /añadir ingrediente:/i;
           const ingredientToAdd = "Quinoa";
           const expectedButtonText = /añadir/i;
+          const expectedConfirmationText = /ingrediente añadido a tu cesta/i;
+
+          addIngredient.mockResolvedValue("added");
 
           render(
             <Provider store={store}>
               <IngredientMenuForm
-                addIngredient={action}
-                onClose={action}
+                addIngredient={addIngredient}
+                onClose={onClose}
                 selectedDay="L"
                 selectedMealType="lunch"
                 weeklyMenu={weeklyMenuData}
@@ -123,7 +135,46 @@ describe("Given the IngredientMenuForm component", () => {
 
           await userEvent.click(addButton);
 
-          expect(action).toHaveBeenCalled();
+          expect(addIngredient).toHaveBeenCalled();
+          expect(
+            screen.getByText(expectedConfirmationText),
+          ).toBeInTheDocument();
+        });
+
+        test("Then it should show duplicate message in the same feedback area", async () => {
+          const expectedLabel = /añadir ingrediente:/i;
+          const ingredientToAdd = "Quinoa";
+          const expectedButtonText = /añadir/i;
+          const expectedDuplicateMessage =
+            /este ingrediente ya está en la cesta/i;
+
+          addIngredient.mockResolvedValue("duplicate");
+
+          render(
+            <Provider store={store}>
+              <IngredientMenuForm
+                addIngredient={addIngredient}
+                onClose={onClose}
+                selectedDay="L"
+                selectedMealType="lunch"
+                weeklyMenu={weeklyMenuData}
+              />
+            </Provider>,
+          );
+
+          const addIngredientTextBox = screen.getByLabelText(expectedLabel);
+
+          await userEvent.type(addIngredientTextBox, ingredientToAdd);
+
+          const addButton = screen.getByRole("button", {
+            name: expectedButtonText,
+          });
+
+          await userEvent.click(addButton);
+
+          expect(
+            screen.getByText(expectedDuplicateMessage),
+          ).toBeInTheDocument();
         });
       });
     });

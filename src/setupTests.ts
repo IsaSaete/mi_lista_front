@@ -11,6 +11,13 @@ export const server = setupServer(
   ...authHandlers,
 );
 
+beforeAll(() => {
+  Object.defineProperty(window, "scrollTo", {
+    value: () => undefined,
+    writable: true,
+  });
+});
+
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());

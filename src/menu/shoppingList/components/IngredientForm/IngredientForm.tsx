@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import type { IngredientSendFormData } from "@/menu/types";
+import type { AddIngredientStatus } from "../../hooks/useShoppingList";
 
 interface IngredientFormProps {
-  addIngredient: (nameIngredient: IngredientSendFormData) => void;
+  addIngredient: (
+    nameIngredient: IngredientSendFormData,
+  ) => Promise<AddIngredientStatus>;
+  onAddResult?: (status: AddIngredientStatus) => void;
+  onResetFeedback?: () => void;
 }
 
-const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
+const IngredientForm: React.FC<IngredientFormProps> = ({
+  addIngredient,
+  onAddResult,
+  onResetFeedback,
+}) => {
   const [ingredientName, setIngredientName] = useState("");
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const trimmedName = ingredientName.trim();
@@ -22,13 +31,15 @@ const IngredientForm: React.FC<IngredientFormProps> = ({ addIngredient }) => {
 
     setIngredientName("");
 
-    addIngredient(ingredientData);
+    const status = await addIngredient(ingredientData);
+    onAddResult?.(status);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
     setIngredientName(newValue);
+    onResetFeedback?.();
   };
 
   return (

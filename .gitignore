@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 coverage
 .env
+docs
+!docs/
+!docs/aprendizaje/
+!docs/aprendizaje/type-guards-y-politica-de-tipos.md

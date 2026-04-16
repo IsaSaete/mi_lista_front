@@ -11,6 +11,12 @@ import {
 } from "../slice/shoppingListSlice";
 import type { IngredientSendFormData } from "@/menu/types";
 import showToast from "@/UI/toast/showToast";
+import { DuplicateIngredientError } from "../client/duplicateIngredientError";
+
+export type AddIngredientStatus = "added" | "duplicate" | "error";
+
+const normalizeIngredientName = (name: string): string =>
+  name.trim().toLowerCase();
 
 const useShoppingList = () => {
   const dispatch = useDispatch();
@@ -35,22 +41,42 @@ const useShoppingList = () => {
   }, [shoppingListClient, dispatch]);
 
   const addIngredient = useCallback(
-    async (ingredientName: IngredientSendFormData): Promise<void> => {
+    async (
+      ingredientName: IngredientSendFormData,
+    ): Promise<AddIngredientStatus> => {
+      const targetName = normalizeIngredientName(ingredientName.name);
+
+      if (
+        ingredients.some(
+          (ingredient) =>
+            normalizeIngredientName(ingredient.name) === targetName,
+        )
+      ) {
+        return "duplicate";
+      }
+
       try {
-        const addIngredient =
+        const newIngredient =
           await shoppingListClient.addIngredient(ingredientName);
 
-        dispatch(addIngredientCreator(addIngredient));
-      } catch {
+        dispatch(addIngredientCreator(newIngredient));
+        return "added";
+      } catch (error) {
+        if (error instanceof DuplicateIngredientError) {
+          return "duplicate";
+        }
+
         showToast(
           "error",
           "Error al añadir el ingrediente",
           "Inténtelo de nuevo",
         );
+
+        return "error";
       }
     },
 
-    [dispatch, shoppingListClient],
+    [dispatch, shoppingListClient, ingredients],
   );
 
   const togglePurchasedStatus = async (ingredientId: string): Promise<void> => {

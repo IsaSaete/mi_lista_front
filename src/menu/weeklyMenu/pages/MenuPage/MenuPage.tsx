@@ -14,7 +14,7 @@ import IngredientMenuForm from "../../components/IngredientMenuForm/IngredientMe
 type ModalType = "none" | "editMeal" | "addIngredients";
 
 const MenuPage: React.FC = () => {
-  const { addIngredient } = useShoppingList();
+  const { addIngredient, loadIngredients } = useShoppingList();
   const { weeklyMenu, loadWeeklyMenu } = useWeeklyMenu();
   const [selectedMeal, setSelectedMeal] = useState<EditingMeal>({
     day: "L",
@@ -44,7 +44,8 @@ const MenuPage: React.FC = () => {
 
   useEffect(() => {
     loadWeeklyMenu();
-  }, [loadWeeklyMenu]);
+    loadIngredients();
+  }, [loadWeeklyMenu, loadIngredients]);
 
   return (
     <>

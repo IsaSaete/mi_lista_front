@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
 
   return (
     <>
-      <header className="fixed top-0 w-full max-w-[500px] mx-auto z-60 bg-primary p-4  h-16 flex items-center justify-between">
+      <header className="fixed top-0 w-full max-w-[500px] mx-auto z-5 bg-primary p-4  h-16 flex items-center justify-between">
         <BurguerMenu />
 
         <Link

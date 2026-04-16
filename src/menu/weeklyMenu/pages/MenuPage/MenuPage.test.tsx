@@ -32,11 +32,13 @@ describe("Given the MenuPage component", () => {
         { wrapper: MemoryRouter },
       );
 
-      expectedDaysButtons.forEach(async (day) => {
-        const dayButton = await screen.findByRole("button", { name: day });
+      for (const day of expectedDaysButtons) {
+        const dayButton = await screen.findByRole("button", {
+          name: `Seleccionar ${day}`,
+        });
 
         expect(dayButton).toBeInTheDocument();
-      });
+      }
     });
 
     describe("And the user click on 'X'", () => {

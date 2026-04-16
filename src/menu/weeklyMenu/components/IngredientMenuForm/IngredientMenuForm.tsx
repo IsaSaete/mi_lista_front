@@ -6,6 +6,7 @@ import type {
   MealType,
   WeeklyMenu,
 } from "@/menu/types";
+import type { AddIngredientStatus } from "@/menu/shoppingList/hooks/useShoppingList";
 import { dayLabels, mealTypeLabels } from "../../mapper/mappersMenu";
 
 interface IngredientMenuFormProps {
@@ -13,8 +14,13 @@ interface IngredientMenuFormProps {
   selectedMealType: MealType;
   weeklyMenu: WeeklyMenu;
   onClose: () => void;
-  addIngredient: (nameIngredient: IngredientSendFormData) => void;
+  addIngredient: (
+    nameIngredient: IngredientSendFormData,
+  ) => Promise<AddIngredientStatus>;
 }
+
+const isNonEmptyString = (value: string | undefined): value is string =>
+  typeof value === "string" && value.trim() !== "";
 
 const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
   selectedDay,
@@ -26,14 +32,20 @@ const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
   const initialMealData = weeklyMenu[selectedDay]?.[selectedMealType] || {};
   const [mealData] = useState<Meal>(initialMealData);
   const [ingredientName, setIngredientName] = useState("");
+  const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [isErrorMessage, setIsErrorMessage] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
 
     setIngredientName(newValue);
+    if (confirmationMessage) {
+      setConfirmationMessage("");
+      setIsErrorMessage(false);
+    }
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     const trimmedName = ingredientName.trim();
@@ -47,15 +59,26 @@ const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
 
     setIngredientName("");
 
-    addIngredient(ingredientData);
+    const status = await addIngredient(ingredientData);
+
+    if (status === "added") {
+      setConfirmationMessage("Ingrediente añadido a tu cesta");
+      setIsErrorMessage(false);
+
+      return;
+    }
+
+    if (status === "duplicate") {
+      setConfirmationMessage("Este ingrediente ya está en la cesta");
+      setIsErrorMessage(true);
+    }
   };
 
   const dayLabel = dayLabels[selectedDay];
   const mealLabel = mealTypeLabels[selectedMealType];
 
-  const isMealEmpty =
-    !mealData ||
-    (!mealData.firstPlate && !mealData.secondPlate && !mealData.dessert);
+  const mealItems = Object.values(mealData).filter(isNonEmptyString);
+  const isMealEmpty = mealItems.length === 0;
 
   return (
     <div className="bg-background border-secondary-hover border-3 text-background p-6 rounded-2xl shadow-md max-w-md mx-auto space-y-3 flex flex-col gap-2">
@@ -68,7 +91,7 @@ const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
         </p>
       ) : (
         <ul className="flex flex-col gap-3 w-full border-secondary-hover border-2 rounded-lg p-2 text-foreground text-xl">
-          {Object.values(mealData).map((meal) => (
+          {mealItems.map((meal) => (
             <li key={meal}>- {meal}</li>
           ))}
         </ul>
@@ -107,6 +130,15 @@ const IngredientMenuForm: React.FC<IngredientMenuFormProps> = ({
             Añadir
           </button>
         </div>
+        {confirmationMessage && (
+          <p
+            className={`mt-3 flex items-center justify-center gap-2 text-center text-md ${
+              isErrorMessage ? "text-error" : "text-secondary-hover"
+            }`}
+          >
+            <span>{confirmationMessage}</span>
+          </p>
+        )}
       </form>
     </div>
   );

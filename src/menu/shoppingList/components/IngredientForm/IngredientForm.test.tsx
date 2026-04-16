@@ -5,7 +5,14 @@ import IngredientForm from "./IngredientForm";
 
 describe("Given the IngredientForm componente", () => {
   const action = vitest.fn();
+  const onAddResult = vitest.fn();
   const user = userEvent.setup();
+
+  beforeEach(() => {
+    action.mockClear();
+    onAddResult.mockClear();
+    action.mockResolvedValue("added");
+  });
 
   describe("When it renders", () => {
     test("Then it should show a 'Nombre del ingrediente' text box", () => {
@@ -41,9 +48,12 @@ describe("Given the IngredientForm componente", () => {
         const expectedLabel = /nombre del ingrediente/i;
         const expectedTypeName = "tomate";
 
-        render(<IngredientForm addIngredient={action} />, {
-          wrapper: MemoryRouter,
-        });
+        render(
+          <IngredientForm addIngredient={action} onAddResult={onAddResult} />,
+          {
+            wrapper: MemoryRouter,
+          },
+        );
 
         const ingredientNameTextBox = screen.getByLabelText(expectedLabel);
 
@@ -58,6 +68,7 @@ describe("Given the IngredientForm componente", () => {
         await user.click(addButton);
 
         expect(action).toHaveBeenCalled();
+        expect(onAddResult).toHaveBeenCalledWith("added");
       });
     });
   });
